@@ -40,6 +40,8 @@ dependencies:
   firebase_core: ^2.4.0
   bloc: ^8.1.0
   meta: ^1.8.0
+  flutter_driver:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
