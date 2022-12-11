@@ -4,8 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   late FlutterDriver driver;
 
-  
-    group('CreatePlan App', () {
+  group('CreatePlan App', () {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
 
