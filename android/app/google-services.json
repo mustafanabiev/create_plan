@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "556383153172",
+    "project_id": "createplan-6006c",
+    "storage_bucket": "createplan-6006c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556383153172:android:60546e4e4eb23adb200b01",
+        "android_client_info": {
+          "package_name": "com.example.create_plan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556383153172-qbqjcbtirk6s5rjsvfa9clo9k83kc9rj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzbPpJz5oQ_9Rt5pNVtOFcDKUUZ9ElEtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556383153172-qbqjcbtirk6s5rjsvfa9clo9k83kc9rj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
