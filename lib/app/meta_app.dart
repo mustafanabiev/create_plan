@@ -1,4 +1,4 @@
-import 'package:create_plan/modules/home/view/home_page.dart';
+import 'package:create_plan/app/router/app_router.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,12 +6,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final router = AppRouter().route;
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: false),
+      routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
     );
   }
 }
