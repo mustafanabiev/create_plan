@@ -1,3 +1,4 @@
+import 'package:create_plan/app/router/app_router_constants.dart';
 import 'package:create_plan/app/theme/custom/colors/app_colors.dart';
 import 'package:create_plan/app/theme/custom/typography/app_text_style.dart';
 import 'package:create_plan/components/input/text_form_field.dart';
@@ -81,7 +82,7 @@ class SignUpView extends StatelessWidget {
                 AppSpace.sized40,
                 ElevatedButton(
                   onPressed: () {
-                    context.go('/userProfile');
+                    context.go('/');
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 3,

@@ -16,7 +16,7 @@ class HomeView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.go('/userProfile');
+          context.pushNamed('/userProfile');
         },
         child:const Icon(Icons.add),
       ),
