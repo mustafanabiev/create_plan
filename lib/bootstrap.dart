@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:create_plan/app/meta_app.dart';
+import 'package:create_plan/locator.dart';
 import 'package:create_plan/modules/authentication/authentication.dart';
 import 'package:create_plan/modules/home/logic/home_cubit.dart';
 import 'package:create_plan/modules/user_profile/logic/user_profile_cubit.dart';
@@ -23,17 +24,20 @@ class AppBlocObserver extends BlocObserver {
 }
 
 Future<void> bootstrap() async {
+  WidgetsFlutterBinding.ensureInitialized();
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
   Bloc.observer = AppBlocObserver();
 
+  await setup();
+
   await runZonedGuarded(
     () async => runApp(
       MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => AuthenticationCubit()),
+          BlocProvider(create: (context) => sl<AuthenticationCubit>()),
           BlocProvider(create: (context) => HomeCubit()),
           BlocProvider(create: (context) => UserProfileCubit()),
         ],
