@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
+import 'package:create_plan/app/meta_app.dart';
+import 'package:create_plan/modules/authentication/authentication.dart';
+import 'package:create_plan/modules/home/logic/home_cubit.dart';
+import 'package:create_plan/modules/user_profile/logic/user_profile_cubit.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -18,7 +22,7 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+Future<void> bootstrap() async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
@@ -26,7 +30,16 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   Bloc.observer = AppBlocObserver();
 
   await runZonedGuarded(
-    () async => runApp(await builder()),
+    () async => runApp(
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => AuthenticationCubit()),
+          BlocProvider(create: (context) => HomeCubit()),
+          BlocProvider(create: (context) => UserProfileCubit()),
+        ],
+        child: const MyApp(),
+      ),
+    ),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
