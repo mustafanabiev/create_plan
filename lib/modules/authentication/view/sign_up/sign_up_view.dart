@@ -1,16 +1,19 @@
-import 'package:create_plan/app/router/app_router_constants.dart';
 import 'package:create_plan/app/theme/custom/colors/app_colors.dart';
 import 'package:create_plan/app/theme/custom/typography/app_text_style.dart';
 import 'package:create_plan/components/input/text_form_field.dart';
 import 'package:create_plan/constants/app_spaces.dart';
 import 'package:create_plan/constants/app_text.dart';
+import 'package:create_plan/modules/authentication/authentication.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpView extends StatelessWidget {
   SignUpView({super.key});
   static final GlobalKey<FormState> fromKey = GlobalKey<FormState>();
-  final textEditingController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final resetPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class SignUpView extends StatelessWidget {
                 AppSpace.sized20,
                 AppTextFormField(
                   obscureText: false,
-                  controller: textEditingController,
+                  controller: emailController,
                   labelText: AppText.emailText,
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
@@ -39,8 +42,9 @@ class SignUpView extends StatelessWidget {
                 AppSpace.sized20,
                 AppTextFormField(
                   obscureText: false,
-                  controller: textEditingController,
-                  hintText: AppText.passwordText,
+                  controller: passwordController,
+                  labelText: AppText.passwordText,
+                  labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
                     onPressed: () {},
@@ -50,8 +54,9 @@ class SignUpView extends StatelessWidget {
                 AppSpace.sized20,
                 AppTextFormField(
                   obscureText: false,
-                  controller: textEditingController,
-                  hintText: AppText.repeatPasswordText,
+                  controller: resetPasswordController,
+                  labelText: AppText.repeatPasswordText,
+                  labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
                 ),
                 AppSpace.sized40,
@@ -80,21 +85,40 @@ class SignUpView extends StatelessWidget {
                   ],
                 ),
                 AppSpace.sized40,
-                ElevatedButton(
-                  onPressed: () {
-                    context.go('/');
+                BlocBuilder<AuthenticationCubit, AuthenticationState>(
+                  builder: (context, state) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        context.go('/');
+                        if (fromKey.currentState!.validate()) {
+                          emailController.clear;
+                          passwordController.clear;
+                          resetPasswordController.clear;
+                          if (emailController.text.isNotEmpty &&
+                              passwordController.text.isNotEmpty &&
+                              resetPasswordController.text.isNotEmpty) {
+                            context.read<AuthenticationCubit>().signUp(
+                                  context,
+                                  emailController.text,
+                                  passwordController.text,
+                                );
+                          }
+                        }
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32.0),
+                        ),
+                        minimumSize: const Size(200, 60),
+                      ),
+                      child: Text(
+                        AppText.signUpText,
+                        style: AppTextStyle.roboto16w500,
+                      ),
+                    );
                   },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32.0),
-                    ),
-                    minimumSize: const Size(200, 40),
-                  ),
-                  child: Text(
-                    AppText.signUpText,
-                    style: AppTextStyle.roboto16w500,
-                  ),
                 ),
               ],
             ),

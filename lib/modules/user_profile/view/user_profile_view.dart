@@ -16,7 +16,7 @@ class UserProfileView extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-                  context.go('/login');
+                  context.go('/');
                 },
                 icon: const Icon(
                   Icons.arrow_forward_ios,
