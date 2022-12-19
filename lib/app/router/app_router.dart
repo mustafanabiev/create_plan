@@ -1,3 +1,4 @@
+import 'package:create_plan/app/router/logic/token_cubit.dart';
 import 'package:create_plan/modules/authentication/authentication.dart';
 import 'package:create_plan/modules/home/view/home_page.dart';
 import 'package:create_plan/modules/user_profile/user_profile.dart';
@@ -8,38 +9,43 @@ const pageKey = ValueKey('_pageKey');
 const scaffoldKey = ValueKey('_scaffoldKey');
 
 class AppRouter {
-  AppRouter();
+  AppRouter(this.context, this.tokenState);
+  final BuildContext context;
+  final TokenState tokenState;
 
-  final GoRouter router = GoRouter(
+  late final GoRouter router = GoRouter(
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) =>const SignUpPage(),
-        // builder: (context, state) =>const HomePage(),
+        pageBuilder: (context, state) => const MaterialPage(
+          child: HomePage(),
+        ),
       ),
       GoRoute(
         path: '/userProfile',
-        builder: (context, state) =>const UserProfilePage(),
+        pageBuilder: (context, state) => const MaterialPage(
+          child: UserProfilePage(),
+        ),
       ),
       GoRoute(
-        path: '/home',
-        builder: (context, state) =>const HomePage(),
+        path: '/login',
+        pageBuilder: (context, state) => MaterialPage<void>(
+          key: pageKey,
+          child: SignInView(),
+        ),
       ),
-      // GoRoute(
-      //   // name: AppRouterConstants.home,
-      //   path: '/',
-      //   pageBuilder: (context, state) => const MaterialPage<void>(
-      //     child: HomePage(),
-      //   ),
-      // ),
     ],
-    // redirect: (context, state) async {
-    //   bool isAuthenticated = false;
-    //   if (!isAuthenticated) {
-    //     return '/login';
-    //   }
-    //   // return null;
-    // },
+    redirect: (context, state) {
+      final loggedIn = tokenState.token != null;
+      final loggingIn = state.subloc == '/login';
+      if (!loggedIn) {
+        return loggingIn ? null : '/login';
+      }
+      if (loggingIn) {
+        return '/';
+      }
+      return null;
+    },
     errorBuilder: (context, state) => Center(
       child: Text('${state.error}'),
     ),

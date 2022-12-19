@@ -14,6 +14,16 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     required this.userRepo,
   }) : super(LoadingState());
 
+  void signIn(BuildContext context, String email, String password) async {
+    emit(LoadingState());
+
+    await authRepo.signIn(
+      context: context,
+      email: email,
+      password: password,
+    );
+  }
+
   void signUp(BuildContext context, String email, String password) async {
     emit(LoadingState());
 
@@ -42,6 +52,12 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           },
         );
       },
+    );
+  }
+
+  void signOut(BuildContext context) async {
+    await authRepo.signOut(
+      context: context,
     );
   }
 }

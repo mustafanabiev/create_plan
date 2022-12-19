@@ -1,6 +1,7 @@
 import 'package:create_plan/app/theme/custom/colors/app_colors.dart';
+import 'package:create_plan/modules/authentication/authentication.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserProfileView extends StatelessWidget {
   const UserProfileView({Key? key}) : super(key: key);
@@ -14,14 +15,18 @@ class UserProfileView extends StatelessWidget {
           children: [
             Align(
               alignment: Alignment.topRight,
-              child: IconButton(
-                onPressed: () {
-                  context.go('/');
+              child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
+                builder: (context, state) {
+                  return IconButton(
+                    onPressed: () {
+                      context.read<AuthenticationCubit>().signOut(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.red,
+                    ),
+                  );
                 },
-                icon: const Icon(
-                  Icons.arrow_forward_ios,
-                  color: AppColors.red,
-                ),
               ),
             ),
           ],

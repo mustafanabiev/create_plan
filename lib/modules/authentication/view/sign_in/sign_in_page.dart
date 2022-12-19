@@ -10,7 +10,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<AuthenticationCubit>(),
-      child: const SignInView(),
+      child:  SignInView(),
     );
   }
 }
