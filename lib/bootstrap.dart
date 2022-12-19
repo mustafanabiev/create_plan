@@ -2,12 +2,16 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:create_plan/app/meta_app.dart';
+import 'package:create_plan/app/router/logic/token_cubit.dart';
+import 'package:create_plan/core/cache/token.dart';
 import 'package:create_plan/locator.dart';
 import 'package:create_plan/modules/authentication/authentication.dart';
 import 'package:create_plan/modules/home/logic/home_cubit.dart';
 import 'package:create_plan/modules/user_profile/logic/user_profile_cubit.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as path;
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -31,15 +35,20 @@ Future<void> bootstrap() async {
 
   Bloc.observer = AppBlocObserver();
 
-  await setup();
+  final dir = await path.getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
+  final tHive = await Hive.openBox<String>(userUidBox);
+
+  await setup(tHive);
 
   await runZonedGuarded(
     () async => runApp(
       MultiBlocProvider(
         providers: [
+          BlocProvider(create: (context) => sl<TokenCubit>()),
           BlocProvider(create: (context) => sl<AuthenticationCubit>()),
-          BlocProvider(create: (context) => HomeCubit()),
-          BlocProvider(create: (context) => UserProfileCubit()),
+          BlocProvider(create: (context) => sl<HomeCubit>()),
+          BlocProvider(create: (context) => sl<UserProfileCubit>()),
         ],
         child: const MyApp(),
       ),
