@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = AppRouter(context,context.watch<TokenCubit>().state).router;
     return MaterialApp.router(
+      
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
