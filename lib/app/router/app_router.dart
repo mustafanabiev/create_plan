@@ -17,29 +17,26 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/',
-        pageBuilder: (context, state) => const MaterialPage(
-          child: HomePage(),
-        ),
+        builder: (context, state) => const HomePage(),
       ),
       GoRoute(
         path: '/userProfile',
-        pageBuilder: (context, state) => const MaterialPage(
-          child: UserProfilePage(),
-        ),
+        builder: (context, state) => const UserProfilePage(),
       ),
       GoRoute(
-        path: '/login',
-        pageBuilder: (context, state) => MaterialPage<void>(
-          key: pageKey,
-          child: SignInView(),
-        ),
+        path: '/signIn',
+        builder: (context, state) => SignInView(),
+      ),
+      GoRoute(
+        path: '/signUp',
+        builder: (context, state) => SignUpView(),
       ),
     ],
     redirect: (context, state) {
       final loggedIn = tokenState.token != null;
-      final loggingIn = state.subloc == '/login';
+      final loggingIn = state.subloc == '/signIn';
       if (!loggedIn) {
-        return loggingIn ? null : '/login';
+        return loggingIn ? null : '/signIn';
       }
       if (loggingIn) {
         return '/';

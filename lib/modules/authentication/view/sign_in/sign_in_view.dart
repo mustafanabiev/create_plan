@@ -7,6 +7,7 @@ import 'package:create_plan/modules/authentication/logic/authentication_cubit.da
 import 'package:create_plan/utils/snackbar/snakbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SignInView extends StatelessWidget {
   SignInView({Key? key}) : super(key: key);
@@ -50,24 +51,37 @@ class SignInView extends StatelessWidget {
                     icon: const Icon(Icons.visibility_off_outlined),
                   ),
                 ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      context.go('/signUp');
+                    },
+                    child: const Text(AppText.signUpText),
+                  ),
+                ),
                 AppSpace.sized40,
                 Row(
-                  children: const [
+                  children: [
                     Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          context.read<AuthenticationCubit>().signInWithGoogle(context);
+                        },
+                        child: Image.asset(
+                          'assets/images/google.png',
+                          height: 45,
+                        ),
+                      ),
+                    ),
+                    const Expanded(
                       child: Icon(
                         Icons.facebook,
                         size: 50,
                         color: AppColors.appButtonColor,
                       ),
                     ),
-                    Expanded(
-                      child: Icon(
-                        Icons.facebook,
-                        size: 50,
-                        color: AppColors.appButtonColor,
-                      ),
-                    ),
-                    Expanded(
+                    const Expanded(
                       child: Icon(
                         Icons.apple,
                         size: 50,
@@ -111,7 +125,7 @@ class SignInView extends StatelessWidget {
                         minimumSize: const Size(200, 60),
                       ),
                       child: Text(
-                        AppText.signUpText,
+                        AppText.signInText,
                         style: AppTextStyle.roboto16w500,
                       ),
                     );

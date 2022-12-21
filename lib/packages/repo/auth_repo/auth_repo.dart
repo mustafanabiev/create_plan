@@ -17,6 +17,9 @@ abstract class AuthRepo {
     required String email,
     required String password,
   });
+  Future<Either<Failure, UserCredential?>> signInWithGoogle({
+    required BuildContext context,
+  });
   Future<Either<Failure, UserCredential?>> signOut({
     required BuildContext context,
   });
@@ -55,6 +58,19 @@ class AuthRepoImpl implements AuthRepo {
         context: context,
         email: email,
         password: password,
+      ));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserCredential?>> signInWithGoogle({
+    required BuildContext context,
+  }) async {
+    try {
+      return Right(await firebaseAuth.signInWithGoogle(
+        context: context,
       ));
     } on ServerException {
       return Left(ServerFailure());

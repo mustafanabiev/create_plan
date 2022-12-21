@@ -55,6 +55,36 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     );
   }
 
+  void signInWithGoogle(BuildContext context) async {
+    final user = await authRepo.signInWithGoogle(context: context);
+    await user.fold(
+      (error) async => emit(
+        const AuthFailureState(''),
+      ),
+      (userCredential) async {
+        final user = await userRepo.createNewUser(
+          user: UserModel(
+            userID: userCredential!.user!.uid,
+            name: userCredential.user!.displayName,
+            email: userCredential.user!.email,
+            phoneNumber: userCredential.user!.phoneNumber,
+            userProFileImage: userCredential.user!.photoURL,
+            refreshToken: userCredential.user!.refreshToken,
+          ),
+        );
+
+        user.fold(
+          (error) => emit(const AuthFailureState('')),
+          (user) {
+            emit(
+              SignUpState(user),
+            );
+          },
+        );
+      },
+    );
+  }
+
   void signOut(BuildContext context) async {
     await authRepo.signOut(
       context: context,
