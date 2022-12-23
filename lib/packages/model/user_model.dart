@@ -2,14 +2,6 @@ UserModel authFromJson(Map docMap) =>
     UserModel.fromJson(docMap as Map<String, dynamic>);
 
 class UserModel {
-  String? userID;
-  String? name;
-  String? email;
-  String? phoneNumber;
-  String? password;
-  String? userProFileImage;
-  String? accessToken;
-  String? refreshToken;
   UserModel({
     this.userID,
     this.name,
@@ -20,6 +12,15 @@ class UserModel {
     this.accessToken,
     this.refreshToken,
   });
+
+  String? userID;
+  String? name;
+  String? email;
+  String? phoneNumber;
+  String? password;
+  String? userProFileImage;
+  String? accessToken;
+  String? refreshToken;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         userID: json['userID'] as String?,
