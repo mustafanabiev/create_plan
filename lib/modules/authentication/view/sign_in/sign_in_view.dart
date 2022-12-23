@@ -4,10 +4,10 @@ import 'package:create_plan/components/input/text_form_field.dart';
 import 'package:create_plan/constants/app_spaces.dart';
 import 'package:create_plan/constants/app_text.dart';
 import 'package:create_plan/modules/authentication/logic/authentication_cubit.dart';
+import 'package:create_plan/modules/authentication/view/sign_up/sign_up_page.dart';
 import 'package:create_plan/utils/snackbar/snakbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class SignInView extends StatelessWidget {
   SignInView({Key? key}) : super(key: key);
@@ -55,7 +55,12 @@ class SignInView extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      context.go('/signUp');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpPage(),
+                        ),
+                      );
                     },
                     child: const Text(AppText.signUpText),
                   ),
@@ -66,7 +71,9 @@ class SignInView extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          context.read<AuthenticationCubit>().signInWithGoogle(context);
+                          context
+                              .read<AuthenticationCubit>()
+                              .signInWithGoogle(context);
                         },
                         child: Image.asset(
                           'assets/images/google.png',

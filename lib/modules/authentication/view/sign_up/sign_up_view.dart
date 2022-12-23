@@ -60,6 +60,15 @@ class SignUpView extends StatelessWidget {
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
                 ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(AppText.signInText),
+                  ),
+                ),
                 AppSpace.sized40,
                 Row(
                   children: const [
