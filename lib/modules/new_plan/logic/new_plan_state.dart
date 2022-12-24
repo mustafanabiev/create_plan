@@ -7,4 +7,18 @@ abstract class NewPlanState extends Equatable {
   List<Object> get props => [];
 }
 
-class NewPlanInitial extends NewPlanState {}
+class NewPlanLoading extends NewPlanState {}
+
+class NewPlanDate extends NewPlanState {
+  const NewPlanDate({
+    this.dateTime,
+    this.startTime,
+    this.endTime,
+  });
+  final DateTime? dateTime;
+  final String? startTime;
+  final String? endTime;
+
+  @override
+  List<Object> get props => [dateTime!, startTime!, endTime!];
+}
