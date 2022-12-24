@@ -10,12 +10,14 @@ class FormTask extends StatelessWidget {
     required this.text,
     required this.hintText,
     this.icon,
+    this.onPressed,
   }) : super(key: key);
 
   final TextEditingController emailController;
   final String text;
   final String hintText;
   final IconData? icon;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,15 @@ class FormTask extends StatelessWidget {
           ),
           AppSpace.sized5,
           AppTextFormField(
+            maxLines: 1,
             controller: emailController,
             obscureText: false,
+            readOnly: icon == null ? false : true,
             hintText: hintText,
-            suffixIcon: Icon(icon),
+            suffixIcon: IconButton(
+              onPressed: onPressed,
+              icon: Icon(icon),
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
             ),

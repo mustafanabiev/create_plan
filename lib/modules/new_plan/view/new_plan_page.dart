@@ -1,3 +1,4 @@
+import 'package:create_plan/locator.dart';
 import 'package:create_plan/modules/new_plan/logic/new_plan_cubit.dart';
 import 'package:create_plan/modules/new_plan/view/new_plan_view.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class NewPlanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NewPlanCubit(),
+      create: (context) => sl<NewPlanCubit>(),
       child: NewPlanView(),
     );
   }

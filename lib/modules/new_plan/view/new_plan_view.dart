@@ -1,17 +1,73 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:create_plan/app/router/logic/token_cubit.dart';
 import 'package:create_plan/app/theme/custom/typography/app_text_style.dart';
 import 'package:create_plan/components/form/form_task.dart';
 import 'package:create_plan/constants/app_spaces.dart';
 import 'package:create_plan/constants/app_text.dart';
+import 'package:create_plan/modules/new_plan/logic/new_plan_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
 class NewPlanView extends StatelessWidget {
   NewPlanView({Key? key}) : super(key: key);
   static final GlobalKey<FormState> fromKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
+  final titleController = TextEditingController();
+  final noteController = TextEditingController();
+  final dateController = TextEditingController();
+  final startTimeController = TextEditingController();
+  final endTimeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final userID = context.read<TokenCubit>().state.token;
+    var selectedDate = DateTime.now();
+    String startTime = DateFormat('hh:mm a').format(selectedDate).toString();
+    String endTime = '9:30 PM';
+
+    Future<DateTime?> getDateFromUser() async {
+      DateTime? pickerDate = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2152),
+      );
+      if (pickerDate != null) {
+        // ignore: use_build_context_synchronously
+        context.read<NewPlanCubit>().updateDate(dateTime: pickerDate);
+      } else {
+        log('Error');
+      }
+      return pickerDate;
+    }
+
+    getTimeFromUser({required bool isStartTime}) async {
+      dynamic pickedTime = await showTimePicker(
+        initialEntryMode: TimePickerEntryMode.input,
+        context: context,
+        initialTime: TimeOfDay(
+          hour: int.parse(startTime.split(':')[0]),
+          minute: int.parse(startTime.split(':')[1].split(' ')[0]),
+        ),
+      );
+      // ignore: use_build_context_synchronously
+      String formatedTime = pickedTime.format(context);
+      if (pickedTime == null) {
+        log('Time canceld');
+      } else if (isStartTime == true) {
+        // ignore: use_build_context_synchronously
+        context.read<NewPlanCubit>().updateDate(startTime: formatedTime);
+        // startTime = formatedTime;
+      } else if (isStartTime == false) {
+        // ignore: use_build_context_synchronously
+        context.read<NewPlanCubit>().updateDate(endTime: formatedTime);
+        // endTime = formatedTime;
+      }
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -33,7 +89,7 @@ class NewPlanView extends StatelessWidget {
               const Spacer(),
               SizedBox(
                 child: FormTask(
-                  emailController: emailController,
+                  emailController: titleController,
                   text: AppText.title,
                   hintText: 'Enter title here.',
                 ),
@@ -41,37 +97,101 @@ class NewPlanView extends StatelessWidget {
               const Spacer(),
               SizedBox(
                 child: FormTask(
-                  emailController: emailController,
+                  emailController: noteController,
                   text: AppText.noteTitle,
                   hintText: 'Enter note here.',
                 ),
               ),
               const Spacer(),
-              SizedBox(
-                child: FormTask(
-                  emailController: emailController,
-                  text: AppText.dateTitle,
-                  hintText: 'Enter date here.',
-                  icon: Icons.calendar_month_outlined,
-                ),
+              BlocBuilder<NewPlanCubit, NewPlanState>(
+                builder: (context, state) {
+                  if (state is NewPlanLoading) {
+                    return SizedBox(
+                      child: FormTask(
+                        emailController: dateController,
+                        text: AppText.dateTitle,
+                        hintText: DateFormat('dd-MM-yyyy').format(selectedDate),
+                        icon: Icons.calendar_month_outlined,
+                        onPressed: getDateFromUser,
+                      ),
+                    );
+                  }
+                  if (state is NewPlanDate) {
+                    return SizedBox(
+                      child: FormTask(
+                        emailController: dateController,
+                        text: AppText.dateTitle,
+                        hintText:
+                            DateFormat('dd-MM-yyyy').format(state.dateTime!),
+                        icon: Icons.calendar_month_outlined,
+                        onPressed: getDateFromUser,
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('Error'),
+                    );
+                  }
+                },
               ),
               const Spacer(),
-              Row(
-                children: [
-                  FormTask(
-                    emailController: emailController,
-                    text: AppText.startTimeTitle,
-                    hintText: 'Start Time',
-                    icon: Icons.access_time_outlined,
-                  ),
-                  AppSpace.sizedW15,
-                  FormTask(
-                    emailController: emailController,
-                    text: AppText.endTimeTitle,
-                    hintText: 'End Time',
-                    icon: Icons.access_time_outlined,
-                  ),
-                ],
+              BlocBuilder<NewPlanCubit, NewPlanState>(
+                builder: (context, state) {
+                  if (state is NewPlanLoading) {
+                    return Row(
+                      children: [
+                        FormTask(
+                          emailController: startTimeController,
+                          text: AppText.startTimeTitle,
+                          hintText: startTime,
+                          icon: Icons.access_time_outlined,
+                          onPressed: () {
+                            getTimeFromUser(isStartTime: true);
+                          },
+                        ),
+                        AppSpace.sizedW15,
+                        FormTask(
+                          emailController: endTimeController,
+                          text: AppText.endTimeTitle,
+                          hintText: endTime,
+                          icon: Icons.access_time_outlined,
+                          onPressed: () {
+                            getTimeFromUser(isStartTime: false);
+                          },
+                        ),
+                      ],
+                    );
+                  }
+                  if (state is NewPlanDate) {
+                    return Row(
+                      children: [
+                        FormTask(
+                          emailController: startTimeController,
+                          text: AppText.startTimeTitle,
+                          hintText: state.startTime!,
+                          icon: Icons.access_time_outlined,
+                          onPressed: () {
+                            getTimeFromUser(isStartTime: true);
+                          },
+                        ),
+                        AppSpace.sizedW15,
+                        FormTask(
+                          emailController: endTimeController,
+                          text: AppText.endTimeTitle,
+                          hintText: state.endTime!,
+                          icon: Icons.access_time_outlined,
+                          onPressed: () {
+                            getTimeFromUser(isStartTime: false);
+                          },
+                        ),
+                      ],
+                    );
+                  } else {
+                    return const Center(
+                      child: Text('Error'),
+                    );
+                  }
+                },
               ),
               const Spacer(),
               Row(
@@ -118,7 +238,15 @@ class NewPlanView extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      context.go('/');
+                      // context.go('/');
+                      context.read<NewPlanCubit>().sendDataToFirebase(
+                            context: context,
+                            userID: userID,
+                            title: titleController.text,
+                            note: noteController.text,
+                            date: const NewPlanDate().dateTime.toString(),
+                            createdAt: Timestamp.now(),
+                          );
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(20),

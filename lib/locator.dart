@@ -12,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 
+import 'modules/new_plan/logic/new_plan_cubit.dart';
 import 'packages/repo/user_repo/user_repo.dart';
 
 final sl = GetIt.instance;
@@ -39,6 +40,11 @@ Future<void> setup(Box<String> tHive) async {
     ..registerFactory(
       () => AuthenticationCubit(
         authRepo: sl<AuthRepo>(),
+        userRepo: sl<UserRepo>(),
+      ),
+    )
+    ..registerFactory(
+      () => NewPlanCubit(
         userRepo: sl<UserRepo>(),
       ),
     )
