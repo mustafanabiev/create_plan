@@ -9,7 +9,6 @@ import 'package:create_plan/constants/app_text.dart';
 import 'package:create_plan/modules/new_plan/logic/new_plan_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class NewPlanView extends StatelessWidget {
@@ -26,7 +25,7 @@ class NewPlanView extends StatelessWidget {
     final userID = context.read<TokenCubit>().state.token;
     var selectedDate = DateTime.now();
     String startTime = DateFormat('hh:mm a').format(selectedDate).toString();
-    String endTime = '9:30 PM';
+    String endTime = '-- : --';
 
     Future<DateTime?> getDateFromUser() async {
       DateTime? pickerDate = await showDatePicker(
@@ -45,7 +44,7 @@ class NewPlanView extends StatelessWidget {
     }
 
     getTimeFromUser({required bool isStartTime}) async {
-      dynamic pickedTime = await showTimePicker(
+      var pickedTime = await showTimePicker(
         initialEntryMode: TimePickerEntryMode.input,
         context: context,
         initialTime: TimeOfDay(
@@ -54,16 +53,17 @@ class NewPlanView extends StatelessWidget {
         ),
       );
       // ignore: use_build_context_synchronously
-      String formatedTime = pickedTime.format(context);
+      String formatedTime = pickedTime!.format(context);
+      // ignore: unnecessary_null_comparison
       if (pickedTime == null) {
         log('Time canceld');
       } else if (isStartTime == true) {
         // ignore: use_build_context_synchronously
-        context.read<NewPlanCubit>().updateDate(startTime: formatedTime);
+        context.read<NewPlanCubit>().updateTime(startTime: formatedTime);
         // startTime = formatedTime;
       } else if (isStartTime == false) {
         // ignore: use_build_context_synchronously
-        context.read<NewPlanCubit>().updateDate(endTime: formatedTime);
+        context.read<NewPlanCubit>().updateTime(endTime: formatedTime);
         // endTime = formatedTime;
       }
     }
@@ -162,7 +162,7 @@ class NewPlanView extends StatelessWidget {
                       ],
                     );
                   }
-                  if (state is NewPlanDate) {
+                  if (state is NewPlanTime) {
                     return Row(
                       children: [
                         FormTask(

@@ -14,16 +14,21 @@ class NewPlanCubit extends Cubit<NewPlanState> {
 
   NewPlanCubit({required this.userRepo}) : super(NewPlanLoading());
 
-  void updateDate({DateTime? dateTime, String? startTime, String? endTime}) {
+  void updateDate({DateTime? dateTime}) {
     emit(NewPlanLoading());
-    if (dateTime != null || startTime != null || endTime != null) {
+    if (dateTime != null) {
       emit(
-        NewPlanDate(
-          dateTime: dateTime,
-          startTime: startTime,
-          endTime: endTime,
-        ),
+        NewPlanDate(dateTime: dateTime),
       );
+    } else {
+      log('Error DateTime');
+    }
+  }
+
+  void updateTime({String? startTime, String? endTime}) {
+    emit(NewPlanLoading());
+    if (startTime != null || endTime != null) {
+      emit(NewPlanTime(startTime: startTime, endTime: endTime));
     } else {
       log('Error DateTime');
     }
