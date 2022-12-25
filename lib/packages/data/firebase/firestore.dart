@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/packages/model/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 abstract class FireStore {
   Future<bool> createNewUser({required UserModel user});
