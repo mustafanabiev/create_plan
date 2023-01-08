@@ -13,7 +13,6 @@ abstract class UserRepo {
     required BuildContext context,
     required UserModel user,
   });
-
 }
 
 class UserRepoImpl implements UserRepo {

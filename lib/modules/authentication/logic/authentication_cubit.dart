@@ -17,10 +17,28 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   void signIn(BuildContext context, String email, String password) async {
     emit(LoadingState());
 
-    await authRepo.signIn(
+    final user = await authRepo.signIn(
       context: context,
       email: email,
       password: password,
+    );
+    await user.fold(
+      (error) async => emit(
+        const AuthFailureState(''),
+      ),
+      (userCredential) async {
+        final user = await userRepo.createNewUser(
+          user: UserModel(
+            userID: userCredential!.user!.uid,
+          ),
+        );
+        user.fold(
+          (error) => emit(const AuthFailureState('')),
+          (user) {
+            emit(SignUpState(user));
+          },
+        );
+      },
     );
   }
 
@@ -76,9 +94,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         user.fold(
           (error) => emit(const AuthFailureState('')),
           (user) {
-            emit(
-              SignUpState(user),
-            );
+            emit(SignUpState(user));
           },
         );
       },

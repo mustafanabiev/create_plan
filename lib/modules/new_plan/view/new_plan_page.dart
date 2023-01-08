@@ -11,7 +11,7 @@ class NewPlanPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<NewPlanCubit>(),
-      child: NewPlanView(),
+      child: const NewPlanView(),
     );
   }
 }
