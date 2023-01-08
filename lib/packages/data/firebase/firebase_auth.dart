@@ -40,13 +40,13 @@ class FirebaseAuthImpl implements FirebaseAuthentication {
         email: email,
         password: password,
       );
-      // ignore: unnecessary_null_comparison
-      if (user != null) {
-        // ignore: use_build_context_synchronously
-        context.read<TokenCubit>().save(user.user!.uid);
-      } else {
-        debugPrint('Error');
-      }
+      // // ignore: unnecessary_null_comparison
+      // if (user != null) {
+      //   // ignore: use_build_context_synchronously
+      //   context.read<TokenCubit>().save(user.user!.uid);
+      // } else {
+      //   debugPrint('Error');
+      // }
       return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -87,24 +87,21 @@ class FirebaseAuthImpl implements FirebaseAuthentication {
   Future<UserCredential?> signInWithGoogle({
     required BuildContext context,
   }) async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
-    // Once signed in, return the UserCredential
-    final user = await FirebaseAuth.instance.signInWithCredential(credential);
-   // ignore: use_build_context_synchronously
-   context.read<TokenCubit>().save(user.user!.uid);
-    return user;
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   @override

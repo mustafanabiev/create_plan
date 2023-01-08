@@ -69,16 +69,30 @@ class SignInView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          context
-                              .read<AuthenticationCubit>()
-                              .signInWithGoogle(context);
+                      child: BlocConsumer<AuthenticationCubit,
+                          AuthenticationState>(
+                        listener: (context, state) async {
+                          if (state is SignUpState) {
+                            await context
+                                .read<TokenCubit>()
+                                .save(state.user!.userID!);
+                          } else if (state is UserFailureState) {
+                            AppSnackBar.instance.snack(context);
+                          }
                         },
-                        child: Image.asset(
-                          'assets/images/google.png',
-                          height: 45,
-                        ),
+                        builder: (context, state) {
+                          return InkWell(
+                            onTap: () {
+                              context
+                                  .read<AuthenticationCubit>()
+                                  .signInWithGoogle(context);
+                            },
+                            child: Image.asset(
+                              'assets/images/google.png',
+                              height: 45,
+                            ),
+                          );
+                        },
                       ),
                     ),
                     const Expanded(
