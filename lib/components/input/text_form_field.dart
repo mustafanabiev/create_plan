@@ -45,11 +45,9 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      // obscureText: obscureText,
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
-      readOnly: readOnly!,
       decoration: InputDecoration(
         border: border,
         hintText: hintText,

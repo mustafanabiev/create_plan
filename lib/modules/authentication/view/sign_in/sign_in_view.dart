@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInView extends StatelessWidget {
-  SignInView({Key? key}) : super(key: key);
+  SignInView({super.key});
   static final GlobalKey<FormState> fromKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
