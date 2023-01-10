@@ -42,9 +42,7 @@ Future<void> setup(Box<String> tHive) async {
       ),
     )
     ..registerFactory(
-      () => NewPlanCubit(
-        userRepo: sl<UserRepo>(),
-      ),
+      () => NewPlanCubit(),
     )
     ..registerLazySingleton<AuthRepo>(
       () => AuthRepoImpl(
