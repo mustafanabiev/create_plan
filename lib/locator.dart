@@ -11,9 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
-
 import 'modules/new_plan/logic/new_plan_cubit.dart';
-import 'packages/repo/user_repo/user_repo.dart';
 
 final sl = GetIt.instance;
 
