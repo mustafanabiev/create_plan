@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:create_plan/packages/model/user_model.dart';
 import 'package:create_plan/packages/packages.dart';
-import 'package:create_plan/packages/repo/user_repo/user_repo.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'authentication_state.dart';
