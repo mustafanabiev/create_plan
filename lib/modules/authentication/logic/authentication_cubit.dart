@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:create_plan/packages/model/user_model.dart';
 import 'package:create_plan/packages/packages.dart';
-import 'package:create_plan/packages/repo/user_repo/user_repo.dart';
 import 'package:flutter/cupertino.dart';
 
 part 'authentication_state.dart';
@@ -17,10 +16,28 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   void signIn(BuildContext context, String email, String password) async {
     emit(LoadingState());
 
-    await authRepo.signIn(
+    final user = await authRepo.signIn(
       context: context,
       email: email,
       password: password,
+    );
+    await user.fold(
+      (error) async => emit(
+        const AuthFailureState(''),
+      ),
+      (userCredential) async {
+        final user = await userRepo.createNewUser(
+          user: UserModel(
+            userID: userCredential!.user!.uid,
+          ),
+        );
+        user.fold(
+          (error) => emit(const AuthFailureState('')),
+          (user) {
+            emit(SignUpState(user));
+          },
+        );
+      },
     );
   }
 
@@ -76,9 +93,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         user.fold(
           (error) => emit(const AuthFailureState('')),
           (user) {
-            emit(
-              SignUpState(user),
-            );
+            emit(SignUpState(user));
           },
         );
       },

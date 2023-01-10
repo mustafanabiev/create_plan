@@ -1,6 +1,7 @@
 import 'package:create_plan/app/router/logic/token_cubit.dart';
 import 'package:create_plan/app/theme/theme.dart';
 import 'package:create_plan/components/input/pass_form_field/pass_form_field.dart';
+
 import 'package:create_plan/components/input/text_form_field.dart';
 import 'package:create_plan/constants/app_spaces.dart';
 import 'package:create_plan/constants/app_text.dart';
@@ -11,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInView extends StatelessWidget {
-  SignInView({Key? key}) : super(key: key);
+  SignInView({super.key});
   static final GlobalKey<FormState> fromKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -46,7 +47,7 @@ class SignInView extends StatelessWidget {
                   labelText: AppText.passwordText,
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
-                  
+
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -66,16 +67,30 @@ class SignInView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          context
-                              .read<AuthenticationCubit>()
-                              .signInWithGoogle(context);
+                      child: BlocConsumer<AuthenticationCubit,
+                          AuthenticationState>(
+                        listener: (context, state) async {
+                          if (state is SignUpState) {
+                            await context
+                                .read<TokenCubit>()
+                                .save(state.user!.userID!);
+                          } else if (state is UserFailureState) {
+                            AppSnackBar.instance.snack(context);
+                          }
                         },
-                        child: Image.asset(
-                          'assets/images/google.png',
-                          height: 45,
-                        ),
+                        builder: (context, state) {
+                          return InkWell(
+                            onTap: () {
+                              context
+                                  .read<AuthenticationCubit>()
+                                  .signInWithGoogle(context);
+                            },
+                            child: Image.asset(
+                              'assets/images/google.png',
+                              height: 45,
+                            ),
+                          );
+                        },
                       ),
                     ),
                     const Expanded(

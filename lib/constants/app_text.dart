@@ -22,4 +22,5 @@ class AppText {
   static const String endTimeTitle = 'End Time';
   static const String createTaskTitle = 'Create Task';
   static const String colorTitle = 'Color';
+
 }
