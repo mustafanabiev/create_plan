@@ -1,9 +1,8 @@
 import 'package:create_plan/app/router/logic/token_cubit.dart';
 import 'package:create_plan/app/theme/custom/colors/app_colors.dart';
 import 'package:create_plan/app/theme/custom/typography/app_text_style.dart';
-import 'package:create_plan/components/input/text_form_field.dart';
-import 'package:create_plan/constants/app_spaces.dart';
-import 'package:create_plan/constants/app_text.dart';
+import 'package:create_plan/components/components.dart';
+import 'package:create_plan/constants/constants.dart';
 import 'package:create_plan/modules/authentication/authentication.dart';
 import 'package:create_plan/utils/snackbar/snakbar.dart';
 import 'package:flutter/material.dart';

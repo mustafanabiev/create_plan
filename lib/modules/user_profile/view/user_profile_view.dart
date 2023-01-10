@@ -1,7 +1,7 @@
-import 'package:create_plan/app/theme/custom/colors/app_colors.dart';
-import 'package:create_plan/modules/authentication/authentication.dart';
+import 'package:create_plan/components/components.dart';
+import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserProfileView extends StatelessWidget {
   const UserProfileView({Key? key}) : super(key: key);
@@ -9,25 +9,76 @@ class UserProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(AppText.profile),
+        centerTitle: true,
+        actions: const [SignOutApp()],
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
-                builder: (context, state) {
-                  return IconButton(
-                    onPressed: () {
-                      context.read<AuthenticationCubit>().signOut(context);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.red,
+            CardPaddingWidget(
+              widget: [
+                Row(
+                  children: [
+                    ClipOval(
+                      child: SizedBox.fromSize(
+                        size: const Size.fromRadius(30),
+                        child: Image.asset('assets/images/google.png'),
+                      ),
                     ),
-                  );
-                },
-              ),
+                    AppSpace.sizedW15,
+                    const CardText(
+                      text: 'Mustafa Nabiev',
+                      text2: 'nabievv02@gmail.com',
+                    ),
+                  ],
+                ),
+                AppSpace.sized25,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    CardText(
+                      text: '120',
+                      text2: 'Create Task',
+                    ),
+                    CardText(
+                      text: '80',
+                      text2: 'Complated Task',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            AppSpace.sized20,
+            CardPaddingWidget(
+              widget: [
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Statistic',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                AppSpace.sized20,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: ListView.builder(
+                    itemCount: 3,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return ProgressBarWidget(
+                        item: percents[index],
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:create_plan/app/theme/custom/colors/app_colors.dart';
 import 'package:create_plan/app/theme/custom/typography/app_text_style.dart';
-import 'package:create_plan/constants/app_text.dart';
+import 'package:create_plan/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
