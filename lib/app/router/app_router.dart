@@ -14,9 +14,14 @@ class AppRouter {
   late final GoRouter router = GoRouter(
     routes: [
       GoRoute(
-        path: '/',
-        builder: (context, state) => const MainView(),
-      ),
+          path: '/',
+          builder: (context, state) => const MainView(),
+          routes: [
+            GoRoute(
+              path: 'newPlan',
+              builder: (context, state) => const NewPlanPage(),
+            ),
+          ]),
       GoRoute(
         path: '/signIn',
         builder: (context, state) => const SignInPage(),

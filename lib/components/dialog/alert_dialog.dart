@@ -3,6 +3,7 @@ import 'package:create_plan/app/theme/custom/typography/app_text_style.dart';
 import 'package:create_plan/constants/app_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 Future<void> showMyDialog(BuildContext context) async {
   return showDialog(
@@ -11,21 +12,30 @@ Future<void> showMyDialog(BuildContext context) async {
       content: Column(
         children: [
           AlertButton(
-            onPressed: () {},
+            onPressed: () {
+              context.go('/newPlan');
+              Navigator.pop(context);
+            },
             text: AppText.addTaskText,
           ),
           const Divider(
             color: AppColors.dividerColor,
           ),
           AlertButton(
-            onPressed: () {},
+            onPressed: () {
+              context.go('/newPlan');
+              Navigator.pop(context);
+            },
             text: AppText.addQuickNoteText,
           ),
           const Divider(
             color: AppColors.dividerColor,
           ),
           AlertButton(
-            onPressed: () {},
+            onPressed: () {
+              context.go('/newPlan');
+              Navigator.pop(context);
+            },
             text: AppText.addCheckListText,
           ),
         ],
