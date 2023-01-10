@@ -18,10 +18,6 @@ class AppRouter {
         builder: (context, state) => const MainView(),
       ),
       GoRoute(
-        path: '/newPlan',
-        builder: (context, state) => const NewPlanPage(),
-      ),
-      GoRoute(
         path: '/signIn',
         builder: (context, state) => const SignInPage(),
       ),
