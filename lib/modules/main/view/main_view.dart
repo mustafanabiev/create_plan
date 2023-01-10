@@ -1,4 +1,4 @@
-import 'package:create_plan/components/dialog/alert_dialog.dart';
+import 'package:create_plan/components/components.dart';
 import 'package:create_plan/modules/home/view/home_page.dart';
 import 'package:create_plan/modules/main/logic/main_cubit.dart';
 import 'package:create_plan/modules/user_profile/user_profile.dart';
