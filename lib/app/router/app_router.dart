@@ -1,8 +1,5 @@
 import 'package:create_plan/app/router/logic/token_cubit.dart';
-import 'package:create_plan/modules/authentication/authentication.dart';
-import 'package:create_plan/modules/home/view/home_page.dart';
-import 'package:create_plan/modules/new_plan/view/new_plan_page.dart';
-import 'package:create_plan/modules/user_profile/user_profile.dart';
+import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,25 +15,11 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const HomePage(),
-        routes: [
-          GoRoute(
-            path: 'newPlan',
-            builder: (context, state) => const NewPlanPage(),
-          ),
-        ],
-      ),
-      GoRoute(
-        path: '/userProfile',
-        builder: (context, state) => const UserProfilePage(),
+        builder: (context, state) => const MainView(),
       ),
       GoRoute(
         path: '/signIn',
         builder: (context, state) => const SignInPage(),
-      ),
-      GoRoute(
-        path: '/signUp',
-        builder: (context, state) => const SignUpPage(),
       ),
     ],
     redirect: (context, state) {

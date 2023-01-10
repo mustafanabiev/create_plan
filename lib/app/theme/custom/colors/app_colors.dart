@@ -14,4 +14,5 @@ class AppColors {
   static const Color red = Color(0xFFEB4335);
   static const Color green = Color(0xff34A853);
   static const Color transparent = Colors.transparent;
+  static const Color dividerColor = Color.fromARGB(255, 175, 165, 165);
 }

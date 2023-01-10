@@ -1,6 +1,7 @@
 import 'package:create_plan/app/router/logic/token_cubit.dart';
 import 'package:create_plan/app/theme/theme.dart';
-import 'package:create_plan/components/input/password_text_form_field/pass_text_form_field.dart';
+import 'package:create_plan/components/input/pass_form_field/pass_form_field.dart';
+
 import 'package:create_plan/components/input/text_form_field.dart';
 import 'package:create_plan/constants/app_spaces.dart';
 import 'package:create_plan/constants/app_text.dart';
@@ -46,6 +47,7 @@ class SignInView extends StatelessWidget {
                   labelText: AppText.passwordText,
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
+
                 ),
                 Align(
                   alignment: Alignment.centerRight,

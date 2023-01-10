@@ -11,6 +11,10 @@ class AppText {
 
   // New Page
   static const String addTaskText = 'Add Task';
+  static const String addQuickNoteText = 'Add Quick Note';
+  static const String addCheckListText = 'Add Check List';
+
+  //
   static const String title = 'Title';
   static const String noteTitle = 'Note';
   static const String dateTitle = 'Date';
