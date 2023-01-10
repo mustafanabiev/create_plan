@@ -46,4 +46,8 @@ class AppTextStyle {
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
+  static TextStyle roboto18w500 = GoogleFonts.roboto(
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+  );
 }

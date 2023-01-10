@@ -36,7 +36,6 @@ class FormTask extends StatelessWidget {
             maxLines: 1,
             controller: emailController,
             obscureText: false,
-            readOnly: icon == null ? false : true,
             hintText: hintText,
             suffixIcon: IconButton(
               onPressed: onPressed,

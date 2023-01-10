@@ -20,7 +20,6 @@ class AppTextFormField extends StatelessWidget {
     this.maxLines,
     this.hintStyle,
     this.border,
-    this.readOnly,
   });
 
   final TextEditingController controller;
@@ -40,7 +39,6 @@ class AppTextFormField extends StatelessWidget {
   final int? maxLines;
   final TextStyle? hintStyle;
   final InputBorder? border;
-  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +47,6 @@ class AppTextFormField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
-      readOnly: readOnly!,
       decoration: InputDecoration(
         border: border,
         hintText: hintText,
