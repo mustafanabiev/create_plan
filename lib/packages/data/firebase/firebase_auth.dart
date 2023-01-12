@@ -1,4 +1,4 @@
-import 'package:create_plan/app/router/logic/token_cubit.dart';
+import 'package:create_plan/app/app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
