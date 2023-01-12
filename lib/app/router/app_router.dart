@@ -1,4 +1,4 @@
-import 'package:create_plan/app/router/logic/token_cubit.dart';
+import 'package:create_plan/app/app.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

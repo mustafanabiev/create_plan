@@ -22,7 +22,6 @@ dependencies:
   hive: ^2.2.3
   shared_preferences: ^2.0.15
   flutter_bloc: ^8.1.1
-  flex_color_scheme: ^6.1.1
   google_fonts: ^3.0.1
   path: ^1.8.2
   get_it: ^7.2.0
