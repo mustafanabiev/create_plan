@@ -1,12 +1,7 @@
-import 'package:create_plan/app/router/logic/token_cubit.dart';
-import 'package:create_plan/app/theme/theme.dart';
-import 'package:create_plan/components/input/pass_form_field/pass_form_field.dart';
-
-import 'package:create_plan/components/input/text_form_field.dart';
-import 'package:create_plan/constants/app_spaces.dart';
-import 'package:create_plan/constants/app_text.dart';
-import 'package:create_plan/modules/authentication/logic/authentication_cubit.dart';
-import 'package:create_plan/modules/authentication/view/sign_up/sign_up_page.dart';
+import 'package:create_plan/app/app.dart';
+import 'package:create_plan/components/components.dart';
+import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/utils/snackbar/snakbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,7 +42,6 @@ class SignInView extends StatelessWidget {
                   labelText: AppText.passwordText,
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
-
                 ),
                 Align(
                   alignment: Alignment.centerRight,

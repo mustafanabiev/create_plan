@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:create_plan/packages/model/user_model.dart';
+import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
 
 abstract class FireStore {

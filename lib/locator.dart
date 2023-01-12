@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:create_plan/app/router/logic/token_cubit.dart';
+import 'package:create_plan/app/app.dart';
+import 'package:create_plan/app/service/theme_service.dart';
+import 'package:create_plan/core/cache/app_cache.dart';
 import 'package:create_plan/core/cache/hive.dart';
 import 'package:create_plan/core/cache/token.dart';
 import 'package:create_plan/firebase_options.dart';
@@ -15,7 +17,11 @@ import 'modules/new_plan/logic/new_plan_cubit.dart';
 
 final sl = GetIt.instance;
 
-Future<void> setup(Box<String> tHive) async {
+Future<void> setup(
+  Box<String> tHive,
+  Box<String> boxApp,
+  Box<int> boxReadTheme,
+) async {
   final firebase = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -42,9 +48,7 @@ Future<void> setup(Box<String> tHive) async {
       ),
     )
     ..registerFactory(
-      () => NewPlanCubit(
-        userRepo: sl<UserRepo>(),
-      ),
+      () => NewPlanCubit(),
     )
     ..registerLazySingleton<AuthRepo>(
       () => AuthRepoImpl(
@@ -56,6 +60,15 @@ Future<void> setup(Box<String> tHive) async {
         firestore: sl<FireStore>(),
       ),
     )
+
+    // service
+    ..registerLazySingleton<ThemeService>(
+      () => ThemeService(
+        sl<AppCache<String>>(),
+      ),
+    )
+    ..registerLazySingleton<AppCache<String>>(() => AppCache(boxApp))
+    ..registerLazySingleton<AppCache<int>>(() => AppCache(boxReadTheme))
 
     // data_source
     ..registerLazySingleton<FirebaseAuthentication>(

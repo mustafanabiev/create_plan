@@ -1,5 +1,7 @@
-import 'package:create_plan/app/theme/custom/colors/app_colors.dart';
-import 'package:create_plan/modules/authentication/authentication.dart';
+import 'package:create_plan/app/app.dart';
+import 'package:create_plan/components/components.dart';
+import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,26 +10,92 @@ class UserProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appCubit = context.watch<AppCubit>();
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(AppText.profile),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            key: const Key('settings-theme-theme-button'),
+            onPressed: () {
+              context.read<AppCubit>().changeMode(
+                    isDark: context.read<AppCubit>().state.theme.brightness ==
+                        Brightness.light,
+                  );
+            },
+            icon: appCubit.state.theme.brightness == Brightness.light
+                ? const Icon(Icons.light_mode)
+                : const Icon(Icons.dark_mode),
+          ),
+          const SignOutApp()
+        ],
+      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
-                builder: (context, state) {
-                  return IconButton(
-                    onPressed: () {
-                      context.read<AuthenticationCubit>().signOut(context);
-                    },
-                    icon: const Icon(
-                      Icons.arrow_forward_ios,
-                      color: AppColors.red,
+            CardPaddingWidget(
+              widget: [
+                Row(
+                  children: [
+                    ClipOval(
+                      child: SizedBox.fromSize(
+                        size: const Size.fromRadius(30),
+                        child: Image.asset('assets/images/google.png'),
+                      ),
                     ),
-                  );
-                },
-              ),
+                    AppSpace.sizedW15,
+                    const CardText(
+                      text: 'Mustafa Nabiev',
+                      text2: 'nabievv02@gmail.com',
+                    ),
+                  ],
+                ),
+                AppSpace.sized25,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    CardText(
+                      text: '120',
+                      text2: 'Create Task',
+                    ),
+                    CardText(
+                      text: '80',
+                      text2: 'Complated Task',
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            AppSpace.sized20,
+            CardPaddingWidget(
+              widget: [
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    AppText.statistic,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                AppSpace.sized20,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: ListView.builder(
+                    itemCount: 3,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return ProgressBarWidget(
+                        item: percents[index],
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),

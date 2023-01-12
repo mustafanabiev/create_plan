@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:create_plan/app/meta_app.dart';
-import 'package:create_plan/app/router/logic/token_cubit.dart';
+import 'package:create_plan/app/app.dart';
+import 'package:create_plan/app/service/theme_service.dart';
 import 'package:create_plan/core/cache/token.dart';
 import 'package:create_plan/locator.dart';
 import 'package:create_plan/modules/authentication/authentication.dart';
@@ -38,8 +38,10 @@ Future<void> bootstrap() async {
   final dir = await path.getApplicationDocumentsDirectory();
   Hive.init(dir.path);
   final tHive = await Hive.openBox<String>(userUidBox);
+  final boxApp = await Hive.openBox<String>('app');
+  final boxReadTheme = await Hive.openBox<int>('read-theme');
 
-  await setup(tHive);
+  await setup(tHive,boxApp, boxReadTheme);
 
   await runZonedGuarded(
     () async => runApp(
@@ -49,6 +51,8 @@ Future<void> bootstrap() async {
           BlocProvider(create: (context) => sl<AuthenticationCubit>()),
           BlocProvider(create: (context) => sl<HomeCubit>()),
           BlocProvider(create: (context) => sl<UserProfileCubit>()),
+          BlocProvider(create: (context) => AppCubit(sl<ThemeService>())),
+
         ],
         child: const MyApp(),
       ),

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:create_plan/packages/model/user_model.dart';
+import 'package:create_plan/packages/model/model.dart';
 import 'package:create_plan/packages/packages.dart';
 import 'package:flutter/cupertino.dart';
 
