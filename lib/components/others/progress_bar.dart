@@ -25,7 +25,7 @@ class ProgressBarWidget extends StatelessWidget {
               style: const TextStyle(fontSize: 26),
             ),
             backgroundColor: Colors.grey,
-            progressColor: Colors.blue,
+            progressColor: Colors.red,
           ),
           AppSpace.sized10,
           Text(

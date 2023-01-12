@@ -57,7 +57,7 @@ class UserProfileView extends StatelessWidget {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Statistic',
+                    AppText.statistic,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

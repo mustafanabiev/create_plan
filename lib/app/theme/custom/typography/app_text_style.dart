@@ -37,17 +37,28 @@ class AppTextStyle {
     color: AppColors.black,
     fontWeight: FontWeight.w500,
   );
-  static TextStyle robotoTextColorBlack18w500 = GoogleFonts.roboto(
-    fontSize: 18,
-    color: AppColors.black,
-    fontWeight: FontWeight.w500,
-  );
+
   static TextStyle roboto16w500 = GoogleFonts.roboto(
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
+  static TextStyle robotoTGrey16w500 = GoogleFonts.roboto(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: const Color.fromARGB(255, 162, 156, 156),
+  );
   static TextStyle roboto18w500 = GoogleFonts.roboto(
     fontSize: 18,
     fontWeight: FontWeight.w500,
+  );
+  static TextStyle robotoTGreyFromARGB18w500 = GoogleFonts.roboto(
+    fontSize: 18,
+    color: const Color.fromARGB(255, 138, 136, 131),
+    fontWeight: FontWeight.w500,
+  );
+  static TextStyle robotoTGrey18w500 = GoogleFonts.roboto(
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    color: const Color.fromARGB(255, 162, 156, 156),
   );
 }

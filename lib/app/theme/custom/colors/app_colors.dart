@@ -15,4 +15,5 @@ class AppColors {
   static const Color green = Color(0xff34A853);
   static const Color transparent = Colors.transparent;
   static const Color dividerColor = Color.fromARGB(255, 175, 165, 165);
+  static const Color taskColor = Color(0xffFD7873);
 }
