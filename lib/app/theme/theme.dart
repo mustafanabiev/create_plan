@@ -3,3 +3,4 @@ export 'custom/component/componet_theme.dart';
 export 'custom/layout/breakpoints.dart';
 export 'custom/typography/app_text_style.dart';
 export 'custom/app_theme/app_theme.dart';
+export 'custom/colors/custom_color.dart';

@@ -41,7 +41,7 @@ Future<void> bootstrap() async {
   final boxApp = await Hive.openBox<String>('app');
   final boxReadTheme = await Hive.openBox<int>('read-theme');
 
-  await setup(tHive,boxApp, boxReadTheme);
+  await setup(tHive, boxApp, boxReadTheme);
 
   await runZonedGuarded(
     () async => runApp(
@@ -49,10 +49,9 @@ Future<void> bootstrap() async {
         providers: [
           BlocProvider(create: (context) => sl<TokenCubit>()),
           BlocProvider(create: (context) => sl<AuthenticationCubit>()),
+          BlocProvider(create: (context) => AppCubit(sl<ThemeService>())),
           BlocProvider(create: (context) => sl<HomeCubit>()),
           BlocProvider(create: (context) => sl<UserProfileCubit>()),
-          BlocProvider(create: (context) => AppCubit(sl<ThemeService>())),
-
         ],
         child: const MyApp(),
       ),

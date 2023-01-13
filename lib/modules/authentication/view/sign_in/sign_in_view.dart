@@ -1,6 +1,7 @@
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/gen/assets.gen.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/utils/snackbar/snakbar.dart';
 import 'package:flutter/material.dart';
@@ -79,10 +80,7 @@ class SignInView extends StatelessWidget {
                                   .read<AuthenticationCubit>()
                                   .signInWithGoogle(context);
                             },
-                            child: Image.asset(
-                              'assets/images/google.png',
-                              height: 45,
-                            ),
+                            child: Assets.images.google.image(height: 45),
                           );
                         },
                       ),

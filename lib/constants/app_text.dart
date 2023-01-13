@@ -23,6 +23,10 @@ class AppText {
   static const String dueData = 'Due Data';
   static const String addData = 'Add Data';
 
+  // Settings Page
+  static const String light = 'Light';
+  static const String dark = 'Dark';
+
   // user profile page
   static const String profile = 'Profiles';
   static const String statistic= 'Statistic';
