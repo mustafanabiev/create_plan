@@ -1,35 +1,18 @@
-import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/gen/assets.gen.dart';
 import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserProfileView extends StatelessWidget {
   const UserProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final appCubit = context.watch<AppCubit>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppText.profile),
         centerTitle: true,
-        actions: [
-          IconButton(
-            key: const Key('settings-theme-theme-button'),
-            onPressed: () {
-              context.read<AppCubit>().changeMode(
-                    isDark: context.read<AppCubit>().state.theme.brightness ==
-                        Brightness.light,
-                  );
-            },
-            icon: appCubit.state.theme.brightness == Brightness.light
-                ? const Icon(Icons.light_mode)
-                : const Icon(Icons.dark_mode),
-          ),
-          const SignOutApp()
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -42,7 +25,7 @@ class UserProfileView extends StatelessWidget {
                     ClipOval(
                       child: SizedBox.fromSize(
                         size: const Size.fromRadius(30),
-                        child: Image.asset('assets/images/google.png'),
+                        child: Assets.images.google.image(),
                       ),
                     ),
                     AppSpace.sizedW15,
