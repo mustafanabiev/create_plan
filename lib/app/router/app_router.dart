@@ -1,5 +1,6 @@
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/modules/modules.dart';
+import 'package:create_plan/modules/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,14 +15,23 @@ class AppRouter {
   late final GoRouter router = GoRouter(
     routes: [
       GoRoute(
-          path: '/',
-          builder: (context, state) => const MainView(),
-          routes: [
-            GoRoute(
-              path: 'newPlan',
-              builder: (context, state) => const NewPlanPage(),
-            ),
-          ]),
+        path: '/',
+        builder: (context, state) => const MainView(),
+        routes: [
+          GoRoute(
+            path: 'theme',
+            builder: (context, state) => const ThemeSettingsView(),
+          ),
+          GoRoute(
+            path: 'newPlan',
+            builder: (context, state) => const NewPlanPage(),
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/settings',
+        builder: (context, state) => const SettingView(),
+      ),
       GoRoute(
         path: '/signIn',
         builder: (context, state) => const SignInPage(),

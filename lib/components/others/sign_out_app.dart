@@ -19,7 +19,7 @@ class SignOutApp extends StatelessWidget {
               context.read<AuthenticationCubit>().signOut(context);
             },
             icon: const Icon(
-              Icons.arrow_forward_ios,
+              Icons.logout,
               color: AppColors.red,
             ),
           );
