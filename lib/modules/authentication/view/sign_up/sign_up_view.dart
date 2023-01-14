@@ -15,6 +15,7 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -112,6 +113,7 @@ class SignUpView extends StatelessWidget {
                           if (emailController.text.isNotEmpty &&
                               passwordController.text.isNotEmpty &&
                               resetPasswordController.text.isNotEmpty) {
+
                             context.read<AuthenticationCubit>().signUp(
                                   context,
                                   emailController.text,
