@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:create_plan/packages/model/model.dart';
+import 'package:create_plan/packages/packages.dart';
 import 'package:flutter/material.dart';
 
 abstract class FireStore {
@@ -18,11 +18,7 @@ class FireStoreImpl implements FireStore {
 
   @override
   Future<bool> createNewUser({required UserModel user}) async {
-    return await firestoreDB
-        .collection("users")
-        .doc(user.userID)
-        .get()
-        .then((userDoc) {
+    return await firestoreDB.collection("users").doc(user.userID).get().then((userDoc) {
       final newUser = UserModel(
         userID: user.userID,
         name: user.name,
@@ -54,11 +50,7 @@ class FireStoreImpl implements FireStore {
       "date": user.date ?? '',
       "createdAt": user.createdAt ?? '',
     };
-    return await firestoreDB
-        .collection('users')
-        .doc(user.userID)
-        .update(updates)
-        .then((userDoc) {
+    return await firestoreDB.collection('users').doc(user.userID).update(updates).then((userDoc) {
       // context.go('/');
       return true;
     }).onError((error, stackTrace) {
@@ -68,8 +60,7 @@ class FireStoreImpl implements FireStore {
 
   @override
   Future<UserModel> getUser({required String userID}) async {
-    DocumentSnapshot user =
-        await firestoreDB.collection("users").doc(userID).get();
+    DocumentSnapshot user = await firestoreDB.collection("users").doc(userID).get();
     if (user.exists) {
       final userMap = user.data() as Map<String, dynamic>;
       UserModel userObject = UserModel.fromJson(userMap);

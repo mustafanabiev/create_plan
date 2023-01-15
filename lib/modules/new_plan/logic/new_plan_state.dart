@@ -8,4 +8,3 @@ abstract class NewPlanState extends Equatable {
 }
 
 class NewPlanLoading extends NewPlanState {}
-

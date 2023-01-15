@@ -51,9 +51,7 @@ class PassFormField extends StatelessWidget {
               suffix: suffix,
               suffixIcon: IconButton(
                 icon: Icon(
-                  state
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
+                  state ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 ),
                 onPressed: () {
                   context.read<PassFormFieldCubit>().change();

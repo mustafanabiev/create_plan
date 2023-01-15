@@ -1,4 +1,4 @@
-import 'package:create_plan/modules/settings/settings.dart';
+import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {

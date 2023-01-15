@@ -3,7 +3,6 @@ part of 'authentication_cubit.dart';
 abstract class AuthenticationState {
   const AuthenticationState();
 
-
   List<Object> get props => [];
 
   get token => null;

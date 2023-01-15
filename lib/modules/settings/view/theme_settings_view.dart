@@ -16,8 +16,7 @@ class ThemeSettingsView extends StatelessWidget {
             key: const Key('settings-theme-theme-button'),
             onPressed: () {
               context.read<AppCubit>().changeMode(
-                    isDark: context.read<AppCubit>().state.theme.brightness ==
-                        Brightness.light,
+                    isDark: context.read<AppCubit>().state.theme.brightness == Brightness.light,
                   );
             },
             icon: appCubit.state.theme.brightness == Brightness.light
@@ -38,9 +37,7 @@ class ThemeSettingsView extends StatelessWidget {
                 color: targetColor,
               ),
               title: Text(targetColor?.value.toString() ?? ''),
-              onTap: () => targetColor != null
-                  ? context.read<AppCubit>().changeColor(index, targetColor)
-                  : {},
+              onTap: () => targetColor != null ? context.read<AppCubit>().changeColor(index, targetColor) : {},
             ),
           );
         },

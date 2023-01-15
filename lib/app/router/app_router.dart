@@ -1,6 +1,5 @@
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/modules/modules.dart';
-import 'package:create_plan/modules/settings/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

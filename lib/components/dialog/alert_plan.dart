@@ -1,4 +1,4 @@
-import 'package:create_plan/app/theme/theme.dart';
+import 'package:create_plan/app/app.dart';
 import 'package:create_plan/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
