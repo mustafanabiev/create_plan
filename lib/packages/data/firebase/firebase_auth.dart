@@ -36,18 +36,10 @@ class FirebaseAuthImpl implements FirebaseAuthentication {
     required BuildContext context,
   }) async {
     try {
-      final user = await firebaseAuth.signInWithEmailAndPassword(
+      return await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      // // ignore: unnecessary_null_comparison
-      // if (user != null) {
-      //   // ignore: use_build_context_synchronously
-      //   context.read<TokenCubit>().save(user.user!.uid);
-      // } else {
-      //   debugPrint('Error');
-      // }
-      return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         throw Exception('The password provided is too weak.');

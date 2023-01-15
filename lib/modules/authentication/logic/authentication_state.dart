@@ -1,38 +1,25 @@
 part of 'authentication_cubit.dart';
 
-abstract class AuthenticationState {
-  const AuthenticationState();
+class AuthenticationState {
+  const AuthenticationState({
+    this.signUpState,
+    this.authFailureState,
+    this.isLoading = false,
+  });
 
-  List<Object> get props => [];
+  final UserModel? signUpState;
+  final Failure? authFailureState;
+  final bool? isLoading;
 
-  get token => null;
-}
-
-class LoadingState extends AuthenticationState {}
-
-class SignUpState extends AuthenticationState {
-  final UserModel? user;
-
-  const SignUpState(this.user);
-
-  @override
-  List<Object> get props => [user!];
-}
-
-class AuthFailureState extends AuthenticationState {
-  final String? message;
-
-  const AuthFailureState(this.message);
-
-  @override
-  List<Object> get props => [message!];
-}
-
-class UserFailureState extends AuthenticationState {
-  final String? message;
-
-  const UserFailureState(this.message);
-
-  @override
-  List<Object> get props => [message!];
+  AuthenticationState copyWith({
+    UserModel? signUpState,
+    Failure? authFailureState,
+    bool isLoading = false,
+  }) {
+    return AuthenticationState(
+      signUpState: signUpState ?? this.signUpState,
+      authFailureState: authFailureState ?? this.authFailureState,
+      isLoading: isLoading,
+    );
+  }
 }
