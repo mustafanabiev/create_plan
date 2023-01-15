@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
@@ -64,10 +66,17 @@ class SignInView extends StatelessWidget {
                     Expanded(
                       child: BlocConsumer<AuthenticationCubit, AuthenticationState>(
                         listener: (context, state) async {
-                          if (state is SignUpState) {
-                            await context.read<TokenCubit>().save(state.user!.userID!);
-                          } else if (state is UserFailureState) {
-                            AppSnackBar.instance.snack(context);
+                          if (state.isLoading != true) {
+                            if (state.signUpState!.userID != null) {
+                              await context.read<TokenCubit>().save(state.signUpState!.userID!);
+                            } else {
+                              log('');
+                            }
+                          } else if (state.authFailureState != null) {
+                            AppSnackBar.instance.snack(
+                              context,
+                              text: state.authFailureState.toString(),
+                            );
                           }
                         },
                         builder: (context, state) {
@@ -98,10 +107,17 @@ class SignInView extends StatelessWidget {
                 AppSpace.sized40,
                 BlocConsumer<AuthenticationCubit, AuthenticationState>(
                   listener: (context, state) async {
-                    if (state is SignUpState) {
-                      await context.read<TokenCubit>().save(state.user!.userID!);
-                    } else if (state is UserFailureState) {
-                      AppSnackBar.instance.snack(context);
+                    if (state.isLoading != true) {
+                      if (state.signUpState!.userID != null) {
+                        await context.read<TokenCubit>().save(state.signUpState!.userID!);
+                      } else {
+                        log('');
+                      }
+                    } else if (state.authFailureState != null) {
+                      AppSnackBar.instance.snack(
+                        context,
+                        text: state.authFailureState.toString(),
+                      );
                     }
                   },
                   builder: (context, state) {

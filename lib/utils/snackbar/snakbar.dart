@@ -9,10 +9,10 @@ class AppSnackBar {
     return _instance!;
   }
 
-  void snack(BuildContext context, {Widget? content}) {
+  void snack(BuildContext context, {Widget? content, String? text}) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: content ?? const Text('Yay! A SnackBar!'),
+        content: content ?? Text(text!),
       ),
     );
   }

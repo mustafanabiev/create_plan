@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:create_plan/core/core.dart';
 import 'package:create_plan/packages/packages.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -10,10 +11,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   AuthenticationCubit({
     required this.authRepo,
     required this.userRepo,
-  }) : super(LoadingState());
+  }) : super(const AuthenticationState());
 
   void signIn(BuildContext context, String email, String password) async {
-    emit(LoadingState());
+    emit(state.copyWith(isLoading: true));
 
     final user = await authRepo.signIn(
       context: context,
@@ -21,9 +22,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
       password: password,
     );
     await user.fold(
-      (error) async => emit(
-        const AuthFailureState(''),
-      ),
+      (error) async => emit(state.copyWith(authFailureState: error)),
       (userCredential) async {
         final user = await userRepo.createNewUser(
           user: UserModel(
@@ -31,27 +30,23 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
           ),
         );
         user.fold(
-          (error) => emit(const AuthFailureState('')),
-          (user) {
-            emit(SignUpState(user));
-          },
+          (error) => emit(state.copyWith(authFailureState: error)),
+          (user) => emit(state.copyWith(signUpState: user)),
         );
       },
     );
   }
 
   void signUp(BuildContext context, String email, String password) async {
-    emit(LoadingState());
+    emit(state.copyWith(isLoading: true));
 
     final user = await authRepo.signUp(
       context: context,
       email: email,
       password: password,
     );
-    await user.fold(
-      (error) async => emit(
-        const AuthFailureState(''),
-      ),
+    user.fold(
+      (error) => emit(state.copyWith(authFailureState: error)),
       (userCredential) async {
         final user = await userRepo.createNewUser(
           user: UserModel(
@@ -62,10 +57,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         );
 
         user.fold(
-          (error) => emit(const AuthFailureState('')),
-          (user) {
-            emit(SignUpState(user));
-          },
+          (error) => emit(state.copyWith(authFailureState: error)),
+          (user) => emit(state.copyWith(signUpState: user)),
         );
       },
     );
@@ -73,10 +66,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   void signInWithGoogle(BuildContext context) async {
     final user = await authRepo.signInWithGoogle(context: context);
-    await user.fold(
-      (error) async => emit(
-        const AuthFailureState(''),
-      ),
+    user.fold(
+      (error) => emit(state.copyWith(authFailureState: error)),
       (userCredential) async {
         final user = await userRepo.createNewUser(
           user: UserModel(
@@ -90,10 +81,8 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         );
 
         user.fold(
-          (error) => emit(const AuthFailureState('')),
-          (user) {
-            emit(SignUpState(user));
-          },
+          (error) => emit(state.copyWith(authFailureState: error)),
+          (user) => emit(state.copyWith(signUpState: user)),
         );
       },
     );
