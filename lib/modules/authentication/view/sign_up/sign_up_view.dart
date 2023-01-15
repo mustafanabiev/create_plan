@@ -94,10 +94,13 @@ class SignUpView extends StatelessWidget {
                 AppSpace.sized40,
                 BlocConsumer<AuthenticationCubit, AuthenticationState>(
                   listener: (context, state) async {
-                    if (state is SignUpState) {
-                      await context.read<TokenCubit>().save(state.user!.userID!);
-                    } else if (state is UserFailureState) {
-                      AppSnackBar.instance.snack(context);
+                    if (state.isLoading != true) {
+                      await context.read<TokenCubit>().save(state.signUpState!.userID!);
+                    } else if (state.authFailureState != null) {
+                      AppSnackBar.instance.snack(
+                        context,
+                        text: state.authFailureState.toString(),
+                      );
                     }
                   },
                   builder: (context, state) {

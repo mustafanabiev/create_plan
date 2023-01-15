@@ -51,7 +51,6 @@ class FireStoreImpl implements FireStore {
       "createdAt": user.createdAt ?? '',
     };
     return await firestoreDB.collection('users').doc(user.userID).update(updates).then((userDoc) {
-      // context.go('/');
       return true;
     }).onError((error, stackTrace) {
       return false;
