@@ -1,4 +1,4 @@
-import 'package:create_plan/core/exception/cache_exception.dart';
+import 'package:create_plan/core/core.dart';
 import 'package:hive/hive.dart';
 
 const String userUidBox = 'userUidBox';
@@ -10,7 +10,7 @@ class TokenService {
   final Box<String> tHive;
 
   Future<void> save(String value) async {
-    try { 
+    try {
       await tHive.put(userUidKey, value);
     } catch (e) {
       throw CacheException(message: 'hive service save error $e');

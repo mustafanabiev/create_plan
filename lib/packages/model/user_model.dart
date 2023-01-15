@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-UserModel authFromJson(Map docMap) =>
-    UserModel.fromJson(docMap as Map<String, dynamic>);
+UserModel authFromJson(Map docMap) => UserModel.fromJson(docMap as Map<String, dynamic>);
 
 class UserModel {
   UserModel({

@@ -1,4 +1,3 @@
-
 class AppRouterConstants {
   static const String home = 'user';
   static const String user = 'user';

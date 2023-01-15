@@ -1,6 +1,5 @@
-import 'package:create_plan/app/theme/custom/colors/custom_color.dart';
-import 'package:create_plan/app/theme/custom/custom_theme.dart';
-import 'package:create_plan/core/cache/app_cache.dart';
+import 'package:create_plan/app/app.dart';
+import 'package:create_plan/core/core.dart';
 import 'package:flutter/material.dart';
 
 class ThemeService {
@@ -15,11 +14,9 @@ class ThemeService {
     final cacheTheme = storage.read(key: _modeKey);
     final cacheColor = storage.read(key: _colorKey);
     if (cacheTheme == 'dark') {
-      return CustomTheme(
-          Brightness.dark, _getColor(cacheColor, isMale: isMale));
+      return CustomTheme(Brightness.dark, _getColor(cacheColor, isMale: isMale));
     } else {
-      return CustomTheme(
-          Brightness.light, _getColor(cacheColor, isMale: isMale));
+      return CustomTheme(Brightness.light, _getColor(cacheColor, isMale: isMale));
     }
   }
 

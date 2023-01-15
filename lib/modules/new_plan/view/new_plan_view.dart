@@ -1,7 +1,6 @@
-import 'package:create_plan/app/theme/theme.dart';
+import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
-import 'package:create_plan/constants/app_spaces.dart';
-import 'package:create_plan/constants/app_text.dart';
+import 'package:create_plan/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class NewPlanView extends StatelessWidget {

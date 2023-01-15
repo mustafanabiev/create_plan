@@ -1,4 +1,4 @@
-import 'package:create_plan/core/exception/cache_exception.dart';
+import 'package:create_plan/core/core.dart';
 import 'package:hive/hive.dart';
 
 class HiveService {

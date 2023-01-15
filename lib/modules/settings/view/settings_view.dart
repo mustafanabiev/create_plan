@@ -16,7 +16,7 @@ class SettingView extends StatelessWidget {
           DrawerHeader(
             decoration: const BoxDecoration(color: Colors.blue),
             child: Container(
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
                   image: Assets.images.google.image().image,
                 ),

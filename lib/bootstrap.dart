@@ -2,12 +2,9 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:create_plan/app/app.dart';
-import 'package:create_plan/app/service/theme_service.dart';
-import 'package:create_plan/core/cache/token.dart';
+import 'package:create_plan/core/core.dart';
 import 'package:create_plan/locator.dart';
-import 'package:create_plan/modules/authentication/authentication.dart';
-import 'package:create_plan/modules/home/logic/home_cubit.dart';
-import 'package:create_plan/modules/user_profile/logic/user_profile_cubit.dart';
+import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';

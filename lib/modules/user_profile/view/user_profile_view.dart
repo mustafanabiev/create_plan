@@ -1,7 +1,7 @@
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
 import 'package:create_plan/gen/assets.gen.dart';
-import 'package:create_plan/packages/model/model.dart';
+import 'package:create_plan/packages/packages.dart';
 import 'package:flutter/material.dart';
 
 class UserProfileView extends StatelessWidget {

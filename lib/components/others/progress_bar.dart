@@ -1,5 +1,5 @@
-import 'package:create_plan/constants/app_spaces.dart';
-import 'package:create_plan/packages/model/model.dart';
+import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/packages/packages.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 

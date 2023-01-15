@@ -1,8 +1,8 @@
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
-import 'package:create_plan/modules/authentication/authentication.dart';
-import 'package:create_plan/utils/snackbar/snakbar.dart';
+import 'package:create_plan/modules/modules.dart';
+import 'package:create_plan/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +15,6 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -96,9 +95,7 @@ class SignUpView extends StatelessWidget {
                 BlocConsumer<AuthenticationCubit, AuthenticationState>(
                   listener: (context, state) async {
                     if (state is SignUpState) {
-                      await context
-                          .read<TokenCubit>()
-                          .save(state.user!.userID!);
+                      await context.read<TokenCubit>().save(state.user!.userID!);
                     } else if (state is UserFailureState) {
                       AppSnackBar.instance.snack(context);
                     }
@@ -113,7 +110,6 @@ class SignUpView extends StatelessWidget {
                           if (emailController.text.isNotEmpty &&
                               passwordController.text.isNotEmpty &&
                               resetPasswordController.text.isNotEmpty) {
-
                             context.read<AuthenticationCubit>().signUp(
                                   context,
                                   emailController.text,
