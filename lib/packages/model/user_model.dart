@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-UserModel authFromJson(Map docMap) => UserModel.fromJson(docMap as Map<String, dynamic>);
+UserModel authFromJson(Map docMap) =>
+    UserModel.fromJson(docMap as Map<String, dynamic>);
 
 class UserModel {
   UserModel({
@@ -12,7 +13,7 @@ class UserModel {
     this.userProFileImage,
     this.accessToken,
     this.refreshToken,
-    this.tasktitle,
+    this.taskTitle,
     this.taskDescription,
     this.taskDate,
     this.createdAt,
@@ -27,7 +28,7 @@ class UserModel {
   String? accessToken;
   String? refreshToken;
   //!
-  String? tasktitle;
+  String? taskTitle;
   String? taskDescription;
   String? taskDate;
   Timestamp? createdAt;
@@ -42,7 +43,7 @@ class UserModel {
         accessToken: json['accessToken'] as String?,
         refreshToken: json['refreshToken'] as String?,
         //!
-        tasktitle: json['tasktitle'] as String?,
+        taskTitle: json['tasktitle'] as String?,
         taskDescription: json['taskDescription'] as String?,
         taskDate: json['taskDate'] as String?,
         createdAt: json['createdAt'] as Timestamp?,
@@ -58,7 +59,7 @@ class UserModel {
         accessToken: json['accessToken'] as String?,
         refreshToken: json['refreshToken'] as String?,
         //!
-        tasktitle: json['tasktitle'] as String?,
+        taskTitle: json['tasktitle'] as String?,
         taskDescription: json['taskDescription'] as String?,
         taskDate: json['taskDate'] as String?,
         createdAt: json['createdAt'] as Timestamp?,
@@ -74,7 +75,7 @@ class UserModel {
         "accessToken": accessToken ?? '',
         "refreshToken": refreshToken ?? '',
         //!
-        "tasktitle": tasktitle ?? '',
+        "tasktitle": taskTitle ?? '',
         "taskDescription": taskDescription ?? '',
         "taskDate": taskDate ?? '',
         "createdAt": createdAt ?? Timestamp.now(),
@@ -90,7 +91,7 @@ class UserModel {
         "accessToken": accessToken ?? '',
         "refreshToken": refreshToken ?? '',
         //!
-        "tasktitle": tasktitle ?? '',
+        "tasktitle": taskTitle ?? '',
         "taskDescription": taskDescription ?? '',
         "taskDate": taskDate ?? '',
         "createdAt": createdAt ?? Timestamp.now(),

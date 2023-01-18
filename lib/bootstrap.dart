@@ -49,6 +49,7 @@ Future<void> bootstrap() async {
           BlocProvider(create: (context) => AppCubit(sl<ThemeService>())),
           BlocProvider(create: (context) => sl<HomeCubit>()),
           BlocProvider(create: (context) => sl<UserProfileCubit>()),
+          BlocProvider(create: (context) => sl<NewPlanCubit>()),
         ],
         child: const MyApp(),
       ),

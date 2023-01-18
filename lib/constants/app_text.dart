@@ -7,8 +7,7 @@ class AppText {
   static const String emailText = 'e-mail';
   static const String passwordText = 'password';
   static const String repeatPasswordText = 'repeat password';
-  static const String validatorPasswordMessage =
-      'Сыр сөз 8 белгиден кем болбошу шарт!';
+  static const String validatorPasswordMessage = 'Сыр сөз 8 белгиден кем болбошу шарт!';
   static const String passWrite = 'Сыр сөздү жазыңыз !!!';
   static const String notTheSame = 'Окшош эмес!!!';
 
