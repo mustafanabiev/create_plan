@@ -45,9 +45,9 @@ class FireStoreImpl implements FireStore {
     required UserModel user,
   }) async {
     final updates = <String, dynamic>{
-      "title": user.title ?? '',
-      "note": user.note ?? '',
-      "date": user.date ?? '',
+      "tasktitle": user.tasktitle ?? '',
+      "taskDescription": user.taskDescription ?? '',
+      "taskDate": user.taskDate ?? '',
       "createdAt": user.createdAt ?? '',
     };
     return await firestoreDB.collection('users').doc(user.userID).update(updates).then((userDoc) {

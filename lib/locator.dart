@@ -22,73 +22,33 @@ Future<void> setup(
   final firebaseAuth = FirebaseAuth.instance;
   final firestoreDB = FirebaseFirestore.instance;
 
-  // repositories
   sl
-    ..registerFactory(
-      () => TokenCubit(
-        tService: sl<TokenService>(),
-      ),
-    )
-    ..registerFactory(
-      () => HomeCubit(),
-    )
-    ..registerFactory(
-      () => UserProfileCubit(),
-    )
-    ..registerFactory(
-      () => AuthenticationCubit(
-        authRepo: sl<AuthRepo>(),
-        userRepo: sl<UserRepo>(),
-      ),
-    )
-    ..registerFactory(
-      () => NewPlanCubit(),
-    )
+    ..registerFactory(() => TokenCubit(tService: sl<TokenService>()))
+    ..registerFactory(() => HomeCubit())
+    ..registerFactory(() => UserProfileCubit())
+    ..registerFactory(() =>
+        AuthenticationCubit(authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()))
+    ..registerFactory(() => NewPlanCubit())
     ..registerLazySingleton<AuthRepo>(
-      () => AuthRepoImpl(
-        firebaseAuth: sl(),
-      ),
+      () => AuthRepoImpl(firebaseAuth: sl()),
     )
     ..registerLazySingleton<UserRepo>(
-      () => UserRepoImpl(
-        firestore: sl<FireStore>(),
-      ),
+      () => UserRepoImpl(firestore: sl<FireStore>()),
     )
-
-    // service
     ..registerLazySingleton<ThemeService>(
-      () => ThemeService(
-        sl<AppCache<String>>(),
-      ),
+      () => ThemeService(sl<AppCache<String>>()),
     )
     ..registerLazySingleton<AppCache<String>>(() => AppCache(boxApp))
     ..registerLazySingleton<AppCache<int>>(() => AppCache(boxReadTheme))
-
-    // data_source
     ..registerLazySingleton<FirebaseAuthentication>(
-      () => FirebaseAuthImpl(
-        firebaseAuth: FirebaseAuth.instance,
-      ),
+      () => FirebaseAuthImpl(firebaseAuth: FirebaseAuth.instance),
     )
     ..registerLazySingleton<FireStore>(
-      () => FireStoreImpl(
-        firestoreDB: sl<FirebaseFirestore>(),
-      ),
+      () => FireStoreImpl(firestoreDB: sl<FirebaseFirestore>()),
     )
-    ..registerLazySingleton(
-      () => firebase,
-    )
-    ..registerLazySingleton(
-      () => firebaseAuth,
-    )
-    ..registerLazySingleton(
-      () => firestoreDB,
-    )
-    //core
-    ..registerLazySingleton(
-      () => TokenService(tHive),
-    )
-    ..registerLazySingleton(
-      () => HiveService(Hive),
-    );
+    ..registerLazySingleton(() => firebase)
+    ..registerLazySingleton(() => firebaseAuth)
+    ..registerLazySingleton(() => firestoreDB)
+    ..registerLazySingleton(() => TokenService(tHive))
+    ..registerLazySingleton(() => HiveService(Hive));
 }
