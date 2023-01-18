@@ -11,6 +11,12 @@ abstract class UserRepo {
     required BuildContext context,
     required UserModel user,
   });
+  Future<Either<Failure, UserModel>> getUser({
+    required String userID,
+  });
+  Future<Either<Failure, UserModel>> deleteUser({
+    required String userID,
+  });
 }
 
 class UserRepoImpl implements UserRepo {
@@ -51,6 +57,24 @@ class UserRepoImpl implements UserRepo {
       } else {
         return Left(ServerFailure());
       }
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> deleteUser({required String userID}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> getUser({required String userID}) async {
+    try {
+      final userModel = await firestore.getUser(
+        userID: userID,
+      );
+
+      return Right(userModel);
     } on ServerException {
       return Left(ServerFailure());
     }

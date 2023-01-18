@@ -18,7 +18,11 @@ class FireStoreImpl implements FireStore {
 
   @override
   Future<bool> createNewUser({required UserModel user}) async {
-    return await firestoreDB.collection("users").doc(user.userID).get().then((userDoc) {
+    return await firestoreDB
+        .collection("users")
+        .doc(user.userID)
+        .get()
+        .then((userDoc) {
       final newUser = UserModel(
         userID: user.userID,
         name: user.name,
@@ -45,12 +49,15 @@ class FireStoreImpl implements FireStore {
     required UserModel user,
   }) async {
     final updates = <String, dynamic>{
-      "tasktitle": user.tasktitle ?? '',
+      "tasktitle": user.taskTitle ?? '',
       "taskDescription": user.taskDescription ?? '',
       "taskDate": user.taskDate ?? '',
-      "createdAt": user.createdAt ?? '',
     };
-    return await firestoreDB.collection('users').doc(user.userID).update(updates).then((userDoc) {
+    return await firestoreDB
+        .collection('users')
+        .doc(user.userID)
+        .update(updates)
+        .then((userDoc) {
       return true;
     }).onError((error, stackTrace) {
       return false;
@@ -59,7 +66,8 @@ class FireStoreImpl implements FireStore {
 
   @override
   Future<UserModel> getUser({required String userID}) async {
-    DocumentSnapshot user = await firestoreDB.collection("users").doc(userID).get();
+    DocumentSnapshot user =
+        await firestoreDB.collection('users').doc(userID).get();
     if (user.exists) {
       final userMap = user.data() as Map<String, dynamic>;
       UserModel userObject = UserModel.fromJson(userMap);

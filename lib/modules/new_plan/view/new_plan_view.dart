@@ -1,14 +1,20 @@
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPlanView extends StatelessWidget {
   NewPlanView({super.key});
+
+  static final GlobalKey<FormState> fromKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final userID = context.read<TokenCubit>().state.token;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xffFDFDFD),
@@ -17,8 +23,8 @@ class NewPlanView extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: Form(
+          key: fromKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -76,7 +82,22 @@ class NewPlanView extends StatelessWidget {
                       45,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if (fromKey.currentState!.validate()) {
+                      titleController.clear;
+                      descController.clear;
+                      if (titleController.text.isNotEmpty &&
+                          descController.text.isNotEmpty) {}
+                    }
+                    context.read<NewPlanCubit>().updateData(
+                          context: context,
+                          userID: userID,
+                          taskTitle: titleController.text,
+                          taskDescription: descController.text,
+                          taskDate: '18.01.2023',
+                        );
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
                   child: Text(
                     AppText.addTaskText,
                     style: AppTextStyle.roboto16w500,

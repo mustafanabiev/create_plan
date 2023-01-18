@@ -1,10 +1,23 @@
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/locator.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => sl<AuthenticationCubit>(),
+      child: SignUpView(),
+    );
+  }
+}
 
 class SignUpView extends StatelessWidget {
   SignUpView({super.key});
@@ -98,9 +111,7 @@ class SignUpView extends StatelessWidget {
                 BlocConsumer<AuthenticationCubit, AuthenticationState>(
                   listener: (context, state) async {
                     if (state.isLoading != true) {
-                      await context
-                          .read<TokenCubit>()
-                          .save(state.signUpState!.userID!);
+                      await context.read<TokenCubit>().save(state.signUpState!.userID!);
                     } else if (state.authFailureState != null) {
                       AppSnackBar.instance.snack(
                         context,

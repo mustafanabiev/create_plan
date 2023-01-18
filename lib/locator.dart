@@ -26,9 +26,11 @@ Future<void> setup(
     ..registerFactory(() => TokenCubit(tService: sl<TokenService>()))
     ..registerFactory(() => HomeCubit())
     ..registerFactory(() => UserProfileCubit())
-    ..registerFactory(() =>
-        AuthenticationCubit(authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()))
-    ..registerFactory(() => NewPlanCubit())
+    ..registerFactory(
+      () => AuthenticationCubit(
+          authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()),
+    )
+    ..registerFactory(() => NewPlanCubit(userRepo: sl<UserRepo>()))
     ..registerLazySingleton<AuthRepo>(
       () => AuthRepoImpl(firebaseAuth: sl()),
     )

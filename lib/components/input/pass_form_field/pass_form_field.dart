@@ -1,5 +1,4 @@
 import 'package:create_plan/components/components.dart';
-import 'package:create_plan/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,9 +53,7 @@ class PassFormField extends StatelessWidget {
               suffix: suffix,
               suffixIcon: IconButton(
                 icon: Icon(
-                  state
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
+                  state ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                 ),
                 onPressed: () {
                   context.read<PassFormFieldCubit>().change();

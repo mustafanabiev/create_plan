@@ -1,10 +1,25 @@
 part of 'new_plan_cubit.dart';
 
-abstract class NewPlanState extends Equatable {
-  const NewPlanState();
+class NewPlanState {
+  const NewPlanState({
+    this.signUpState,
+    this.authFailureState,
+    this.isLoading = false,
+  });
 
-  @override
-  List<Object> get props => [];
+  final UserModel? signUpState;
+  final Failure? authFailureState;
+  final bool? isLoading;
+
+  NewPlanState copyWith({
+    UserModel? signUpState,
+    Failure? authFailureState,
+    bool isLoading = false,
+  }) {
+    return NewPlanState(
+      signUpState: signUpState ?? this.signUpState,
+      authFailureState: authFailureState ?? this.authFailureState,
+      isLoading: isLoading,
+    );
+  }
 }
-
-class NewPlanLoading extends NewPlanState {}
