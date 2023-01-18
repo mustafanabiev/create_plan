@@ -15,6 +15,7 @@ class PassFormField extends StatelessWidget {
     this.border,
     this.suffix,
     this.labelStyle,
+    this.validator,
   });
 
   final TextEditingController controller;
@@ -26,6 +27,7 @@ class PassFormField extends StatelessWidget {
   final InputBorder? border;
   final Widget? suffix;
   final TextStyle? labelStyle;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +37,13 @@ class PassFormField extends StatelessWidget {
         builder: (context, state) {
           return TextFormField(
             controller: controller,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return AppText.validatorPasswordMessage;
-              }
-              return null;
-            },
+            validator: validator,
+            // validator: (value) {
+            //   if (value!.isEmpty) {
+            //     return AppText.validatorPasswordMessage;
+            //   }
+            //   return null;
+            // },
             obscureText: state,
             decoration: InputDecoration(
               border: border,
@@ -51,7 +54,9 @@ class PassFormField extends StatelessWidget {
               suffix: suffix,
               suffixIcon: IconButton(
                 icon: Icon(
-                  state ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                  state
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
                 ),
                 onPressed: () {
                   context.read<PassFormFieldCubit>().change();
