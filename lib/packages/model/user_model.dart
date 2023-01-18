@@ -12,9 +12,9 @@ class UserModel {
     this.userProFileImage,
     this.accessToken,
     this.refreshToken,
-    this.title,
-    this.note,
-    this.date,
+    this.tasktitle,
+    this.taskDescription,
+    this.taskDate,
     this.createdAt,
   });
 
@@ -27,9 +27,9 @@ class UserModel {
   String? accessToken;
   String? refreshToken;
   //!
-  String? title;
-  String? note;
-  String? date;
+  String? tasktitle;
+  String? taskDescription;
+  String? taskDate;
   Timestamp? createdAt;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -42,9 +42,9 @@ class UserModel {
         accessToken: json['accessToken'] as String?,
         refreshToken: json['refreshToken'] as String?,
         //!
-        title: json['title'] as String?,
-        note: json['note'] as String?,
-        date: json['date'] as String?,
+        tasktitle: json['tasktitle'] as String?,
+        taskDescription: json['taskDescription'] as String?,
+        taskDate: json['taskDate'] as String?,
         createdAt: json['createdAt'] as Timestamp?,
       );
 
@@ -58,9 +58,9 @@ class UserModel {
         accessToken: json['accessToken'] as String?,
         refreshToken: json['refreshToken'] as String?,
         //!
-        title: json['title'] as String?,
-        note: json['note'] as String?,
-        date: json['date'] as String?,
+        tasktitle: json['tasktitle'] as String?,
+        taskDescription: json['taskDescription'] as String?,
+        taskDate: json['taskDate'] as String?,
         createdAt: json['createdAt'] as Timestamp?,
       );
 
@@ -74,9 +74,9 @@ class UserModel {
         "accessToken": accessToken ?? '',
         "refreshToken": refreshToken ?? '',
         //!
-        "title": title ?? '',
-        "note": note ?? '',
-        "date": date ?? '',
+        "tasktitle": tasktitle ?? '',
+        "taskDescription": taskDescription ?? '',
+        "taskDate": taskDate ?? '',
         "createdAt": createdAt ?? Timestamp.now(),
       };
 
@@ -90,9 +90,9 @@ class UserModel {
         "accessToken": accessToken ?? '',
         "refreshToken": refreshToken ?? '',
         //!
-        "title": title ?? '',
-        "note": note ?? '',
-        "date": date ?? '',
+        "tasktitle": tasktitle ?? '',
+        "taskDescription": taskDescription ?? '',
+        "taskDate": taskDate ?? '',
         "createdAt": createdAt ?? Timestamp.now(),
       };
 }

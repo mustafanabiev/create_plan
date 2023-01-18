@@ -38,24 +38,27 @@ class SignUpView extends StatelessWidget {
                   border: const OutlineInputBorder(),
                 ),
                 AppSpace.sized20,
-                AppTextFormField(
-                  obscureText: false,
+                PassFormField(
                   controller: passwordController,
                   labelText: AppText.passwordText,
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.visibility_off_outlined),
-                  ),
                 ),
                 AppSpace.sized20,
-                AppTextFormField(
-                  obscureText: false,
+                PassFormField(
                   controller: resetPasswordController,
                   labelText: AppText.repeatPasswordText,
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return AppText.passWrite;
+                    }
+                    if (value != passwordController.text) {
+                      return AppText.notTheSame;
+                    }
+                    return null;
+                  },
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -95,7 +98,9 @@ class SignUpView extends StatelessWidget {
                 BlocConsumer<AuthenticationCubit, AuthenticationState>(
                   listener: (context, state) async {
                     if (state.isLoading != true) {
-                      await context.read<TokenCubit>().save(state.signUpState!.userID!);
+                      await context
+                          .read<TokenCubit>()
+                          .save(state.signUpState!.userID!);
                     } else if (state.authFailureState != null) {
                       AppSnackBar.instance.snack(
                         context,
