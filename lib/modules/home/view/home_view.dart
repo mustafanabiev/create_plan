@@ -1,5 +1,7 @@
 import 'package:create_plan/modules/modules.dart';
+import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -11,42 +13,40 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      body: ListView.builder(
-        itemCount: 20,
-        itemBuilder: (context, index) {
-          return const Card(
-            child: ListTile(
-              leading: Icon(Icons.check_box_outline_blank),
-              title: Text('HomePage'),
-            ),
-          );
+      body: StreamBuilder(
+        stream: context.read<NewPlanCubit>().getStreamUser(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final messages = (snapshot.data!.docs).map(
+              (e) => UserModel.fromJson(e.data()),
+            );
+            return ListView(
+              children: messages.map((e) => MessageWidget(data: e)).toList(),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
         },
       ),
     );
   }
 }
 
-/*
-BlocBuilder<NewPlanCubit, NewPlanState>(
-        builder: (context, state) {
-          if (state.isLoading != true) {
-            if (state.signUpState!.userID != null) {
-              return Card(
-                child: ListTile(
-                  title: Text(state.signUpState!.taskTitle!),
-                ),
-              );
-            } else {
-              log('message');
-            }
-          } else if (state.authFailureState != null) {
-            AppSnackBar.instance.snack(
-              context,
-              text: state.authFailureState.toString(),
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-          return const Text('Error');
-        },
-      ), */
+class MessageWidget extends StatelessWidget {
+  const MessageWidget({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  final UserModel data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        leading: const Icon(Icons.check_box_outline_blank),
+        title: Text(data.email!),
+      ),
+    );
+  }
+}
