@@ -46,6 +46,7 @@ class SignUpView extends StatelessWidget {
                 AppTextFormField(
                   obscureText: false,
                   controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
                   labelText: AppText.emailText,
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
@@ -111,7 +112,9 @@ class SignUpView extends StatelessWidget {
                 BlocConsumer<AuthenticationCubit, AuthenticationState>(
                   listener: (context, state) async {
                     if (state.isLoading != true) {
-                      await context.read<TokenCubit>().save(state.signUpState!.userID!);
+                      await context
+                          .read<TokenCubit>()
+                          .save(state.signUpState!.userID!);
                     } else if (state.authFailureState != null) {
                       AppSnackBar.instance.snack(
                         context,

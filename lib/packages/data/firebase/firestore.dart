@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 abstract class FireStore {
   Future<bool> createNewUser({required UserModel user});
   Future<UserModel> getUser({required String userID});
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser();
   Future<bool> updateUser({
     required BuildContext context,
     required UserModel user,
@@ -75,5 +76,12 @@ class FireStoreImpl implements FireStore {
     } else {
       return UserModel();
     }
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser() {
+    final data = firestoreDB.collection('users').snapshots();
+
+    return data;
   }
 }

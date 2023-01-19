@@ -31,7 +31,7 @@ class UserProfileView extends StatelessWidget {
                     AppSpace.sizedW15,
                     const CardText(
                       text: 'Mustafa Nabiev',
-                      text2: 'nabievv02@gmail.com',
+                      text2: 'nabiev@gmail.com',
                     ),
                   ],
                 ),
