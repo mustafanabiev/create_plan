@@ -18,7 +18,7 @@ abstract class UserRepo {
   Future<Either<Failure, UserModel>> deleteUser({
     required String userID,
   });
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser();
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID);
 }
 
 class UserRepoImpl implements UserRepo {
@@ -83,7 +83,7 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser() {
-    return firestore.getStreamUser();
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID) {
+    return firestore.getStreamUser(userID);
   }
 }

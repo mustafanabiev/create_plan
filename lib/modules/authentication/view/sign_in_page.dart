@@ -57,7 +57,6 @@ class SignInView extends StatelessWidget {
                 PassFormField(
                   controller: passwordController,
                   labelText: AppText.passwordText,
-                  
                   labelStyle: const TextStyle(fontSize: 18),
                   border: const OutlineInputBorder(),
                 ),
@@ -79,14 +78,11 @@ class SignInView extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: BlocConsumer<AuthenticationCubit,
-                          AuthenticationState>(
+                      child: BlocConsumer<AuthenticationCubit, AuthenticationState>(
                         listener: (context, state) async {
                           if (state.isLoading != true) {
                             if (state.signUpState!.userID != null) {
-                              await context
-                                  .read<TokenCubit>()
-                                  .save(state.signUpState!.userID!);
+                              await context.read<TokenCubit>().save(state.signUpState!.userID!);
                             } else {
                               log('');
                             }
@@ -100,9 +96,7 @@ class SignInView extends StatelessWidget {
                         builder: (context, state) {
                           return InkWell(
                             onTap: () {
-                              context
-                                  .read<AuthenticationCubit>()
-                                  .signInWithGoogle(context);
+                              context.read<AuthenticationCubit>().signInWithGoogle(context);
                             },
                             child: Assets.images.google.image(height: 45),
                           );
@@ -129,9 +123,7 @@ class SignInView extends StatelessWidget {
                   listener: (context, state) async {
                     if (state.isLoading != true) {
                       if (state.signUpState!.userID != null) {
-                        await context
-                            .read<TokenCubit>()
-                            .save(state.signUpState!.userID!);
+                        await context.read<TokenCubit>().save(state.signUpState!.userID!);
                       } else {
                         log('');
                       }
@@ -148,8 +140,7 @@ class SignInView extends StatelessWidget {
                         if (fromKey.currentState!.validate()) {
                           emailController.clear;
                           passwordController.clear;
-                          if (emailController.text.isNotEmpty &&
-                              passwordController.text.isNotEmpty) {
+                          if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
                             context.read<AuthenticationCubit>().signIn(
                                   context,
                                   emailController.text,

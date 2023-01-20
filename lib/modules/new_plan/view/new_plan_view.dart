@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
 import 'package:create_plan/modules/modules.dart';
+import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -87,15 +89,15 @@ class NewPlanView extends StatelessWidget {
                       if (fromKey.currentState!.validate()) {
                         titleController.clear;
                         descController.clear;
-                        if (titleController.text.isNotEmpty &&
-                            descController.text.isNotEmpty) {
-                          context.read<NewPlanCubit>().updateData(
-                                context: context,
+                        if (titleController.text.isNotEmpty && descController.text.isNotEmpty) {
+                          context.read<NewPlanCubit>().createNewPlan(
+                                  newPlan: NewPlanModel(
                                 userID: userID,
                                 taskTitle: titleController.text,
                                 taskDescription: descController.text,
                                 taskDate: '18.01.2023',
-                              );
+                                createdAt: Timestamp.now(),
+                              ));
                           context.go('/');
                         }
                       }
