@@ -30,6 +30,7 @@ dependencies:
   google_sign_in: ^5.4.2
   syncfusion_flutter_gauges: ^20.4.43
   percent_indicator: ^4.2.2
+  intl: ^0.17.0
 
 
 dev_dependencies:
