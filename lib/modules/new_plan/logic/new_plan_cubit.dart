@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/core/core.dart';
@@ -7,11 +9,26 @@ import 'package:flutter/cupertino.dart';
 part 'new_plan_state.dart';
 
 class NewPlanCubit extends Cubit<NewPlanState> {
+  final NewPlanRepo newPlanRepo;
   final UserRepo userRepo;
-  NewPlanCubit({required this.userRepo}) : super(const NewPlanState());
+  NewPlanCubit({
+    required this.newPlanRepo,
+    required this.userRepo,
+  }) : super(const NewPlanState());
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser() {
-    return userRepo.getStreamUser();
+  void createNewPlan({required NewPlanModel newPlan}) async {
+    emit(state.copyWith(isLoading: true));
+
+    final newplan = await newPlanRepo.createNewPlan(newPlan: newPlan);
+    if (newplan != null) {
+      (newplan) => emit(state.copyWith(signUpState: newplan));
+    } else {
+      log('Error ================> Error');
+    }
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID) {
+    return userRepo.getStreamUser(userID);
   }
 
   void getUser({String? userID}) async {

@@ -1,3 +1,4 @@
+import 'package:create_plan/app/app.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +9,18 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userID = context.read<TokenCubit>().state.token;
     return Scaffold(
       drawer: const Drawer(child: SettingView()),
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
       body: StreamBuilder(
-        stream: context.read<NewPlanCubit>().getStreamUser(),
+        stream: context.read<NewPlanCubit>().getStreamUser(userID!),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final messages = (snapshot.data!.docs).map(
-              (e) => UserModel.fromJson(e.data()),
+              (e) => NewPlanModel.fromJson(e.data()),
             );
             return ListView(
               children: messages.map((e) => MessageWidget(data: e)).toList(),
@@ -38,14 +40,14 @@ class MessageWidget extends StatelessWidget {
     required this.data,
   }) : super(key: key);
 
-  final UserModel data;
+  final NewPlanModel data;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         leading: const Icon(Icons.check_box_outline_blank),
-        title: Text(data.email!),
+        title: Text(data.taskTitle!),
       ),
     );
   }
