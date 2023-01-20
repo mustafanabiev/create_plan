@@ -20,10 +20,11 @@ class NewPlanCubit extends Cubit<NewPlanState> {
     emit(state.copyWith(isLoading: true));
 
     final newplan = await newPlanRepo.createNewPlan(newPlan: newPlan);
+    // ignore: unnecessary_null_comparison
     if (newplan != null) {
       (newplan) => emit(state.copyWith(signUpState: newplan));
     } else {
-      log('Error ================> Error');
+      log('There is an error on the server');
     }
   }
 
