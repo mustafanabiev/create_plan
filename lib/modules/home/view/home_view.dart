@@ -1,9 +1,9 @@
 import 'package:create_plan/app/app.dart';
+import 'package:create_plan/components/components.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -24,33 +24,12 @@ class HomeView extends StatelessWidget {
               (e) => NewPlanModel.fromJson(e.data()),
             );
             return ListView(
-              children: messages.map((e) => NewPlanWidget(data: e)).toList(),
+              children: messages.map((e) => NewPlanCard(data: e)).toList(),
             );
           } else {
             return const Center(child: CircularProgressIndicator());
           }
         },
-      ),
-    );
-  }
-}
-
-class NewPlanWidget extends StatelessWidget {
-  const NewPlanWidget({
-    Key? key,
-    required this.data,
-  }) : super(key: key);
-
-  final NewPlanModel data;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: const Icon(Icons.check_box_outline_blank),
-        title: Text(data.taskTitle!),
-        subtitle: Text(data.taskDescription!),
-        trailing: Text(data.createdAt!.toDate().toString()),
       ),
     );
   }
