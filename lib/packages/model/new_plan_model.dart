@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-NewPlanModel authFromJson(Map docMap) => NewPlanModel.fromJson(docMap as Map<String, dynamic>);
+NewPlanModel authFromJson(Map docMap) =>
+    NewPlanModel.fromJson(docMap as Map<String, dynamic>);
 
 class NewPlanModel {
   NewPlanModel({
