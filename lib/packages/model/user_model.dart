@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-UserModel authFromJson(Map docMap) =>
-    UserModel.fromJson(docMap as Map<String, dynamic>);
-
 class UserModel {
   UserModel({
     this.userID,
@@ -13,9 +10,6 @@ class UserModel {
     this.userProFileImage,
     this.accessToken,
     this.refreshToken,
-    this.taskTitle,
-    this.taskDescription,
-    this.taskDate,
     this.createdAt,
   });
 
@@ -27,10 +21,6 @@ class UserModel {
   String? userProFileImage;
   String? accessToken;
   String? refreshToken;
-  //!
-  String? taskTitle;
-  String? taskDescription;
-  String? taskDate;
   Timestamp? createdAt;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -42,10 +32,6 @@ class UserModel {
         userProFileImage: json['userProFileImage'] as String?,
         accessToken: json['accessToken'] as String?,
         refreshToken: json['refreshToken'] as String?,
-        //!
-        taskTitle: json['tasktitle'] as String?,
-        taskDescription: json['taskDescription'] as String?,
-        taskDate: json['taskDate'] as String?,
         createdAt: json['createdAt'] as Timestamp?,
       );
 
@@ -58,10 +44,6 @@ class UserModel {
         userProFileImage: json['userProFileImage'] as String?,
         accessToken: json['accessToken'] as String?,
         refreshToken: json['refreshToken'] as String?,
-        //!
-        taskTitle: json['tasktitle'] as String?,
-        taskDescription: json['taskDescription'] as String?,
-        taskDate: json['taskDate'] as String?,
         createdAt: json['createdAt'] as Timestamp?,
       );
 
@@ -74,10 +56,6 @@ class UserModel {
         "userProFileImage": userProFileImage ?? '',
         "accessToken": accessToken ?? '',
         "refreshToken": refreshToken ?? '',
-        //!
-        "tasktitle": taskTitle ?? '',
-        "taskDescription": taskDescription ?? '',
-        "taskDate": taskDate ?? '',
         "createdAt": createdAt ?? Timestamp.now(),
       };
 
@@ -90,10 +68,6 @@ class UserModel {
         "userProFileImage": userProFileImage ?? '',
         "accessToken": accessToken ?? '',
         "refreshToken": refreshToken ?? '',
-        //!
-        "tasktitle": taskTitle ?? '',
-        "taskDescription": taskDescription ?? '',
-        "taskDate": taskDate ?? '',
         "createdAt": createdAt ?? Timestamp.now(),
       };
 }

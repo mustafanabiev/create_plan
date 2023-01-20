@@ -35,12 +35,7 @@ class NewPlanCubit extends Cubit<NewPlanState> {
 
     final user = await userRepo.updateUser(
       context: context,
-      user: UserModel(
-        userID: userID,
-        taskTitle: taskTitle,
-        taskDescription: taskDescription,
-        taskDate: taskDate,
-      ),
+      user: UserModel(userID: userID),
     );
 
     await user.fold(

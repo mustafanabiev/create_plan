@@ -49,11 +49,7 @@ class FireStoreImpl implements FireStore {
     required BuildContext context,
     required UserModel user,
   }) async {
-    final updates = <String, dynamic>{
-      "tasktitle": user.taskTitle ?? '',
-      "taskDescription": user.taskDescription ?? '',
-      "taskDate": user.taskDate ?? '',
-    };
+    final updates = <String, dynamic>{};
     return await firestoreDB
         .collection('users')
         .doc(user.userID)
