@@ -43,9 +43,7 @@ class SignInView extends StatelessWidget {
               listener: (context, state) async {
                 if (state.isLoading != true) {
                   if (state.signUpState!.userID != null) {
-                    await context
-                        .read<TokenCubit>()
-                        .save(state.signUpState!.userID!);
+                    await context.read<TokenCubit>().save(state.signUpState!.userID!);
                   } else {
                     log('');
                   }
@@ -59,13 +57,10 @@ class SignInView extends StatelessWidget {
               builder: (context, state) {
                 return ElevatedButton.icon(
                   onPressed: () {
-                    context
-                        .read<AuthenticationCubit>()
-                        .signInWithGoogle(context);
+                    context.read<AuthenticationCubit>().signInWithGoogle(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    minimumSize:
-                        Size(MediaQuery.of(context).size.width * 0.8, 55),
+                    minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 55),
                   ),
                   icon: Assets.images.google.image(height: 40),
                   label: const Text(
