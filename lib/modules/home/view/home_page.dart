@@ -28,13 +28,11 @@ class HomeView extends StatelessWidget {
         title: const Text('Home Page'),
       ),
       body: StreamBuilder(
-        stream: context
-            .read<NewPlanCubit>()
-            .getStreamUser(GetToken.getToken(context)),
+        stream: context.read<NewPlanCubit>().getStreamUser(GetToken.getToken(context)),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final messages = (snapshot.data!.docs).map(
-              (e) => NewPlanModel.fromJson(json:  e.data(),taskID:  e.id),
+              (e) => NewPlanModel.fromJson(json: e.data(), taskID: e.id),
             );
             return ListView(
               children: messages

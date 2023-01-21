@@ -79,6 +79,4 @@ class UserRepoImpl implements UserRepo {
       return Left(ServerFailure());
     }
   }
-
-
 }

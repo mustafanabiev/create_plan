@@ -21,11 +21,7 @@ class FireStoreImpl implements FireStore {
 
   @override
   Future<bool> createNewUser({required UserModel user}) async {
-    return await firestoreDB
-        .collection("users")
-        .doc(user.userID)
-        .get()
-        .then((userDoc) {
+    return await firestoreDB.collection("users").doc(user.userID).get().then((userDoc) {
       final newUser = UserModel(
         userID: user.userID,
         name: user.name,
@@ -50,12 +46,7 @@ class FireStoreImpl implements FireStore {
   Future createNewPlan({required NewPlanModel newplan}) async {
     final newPlan = newplan.toJson();
 
-    final newTaskPlan = firestoreDB
-        .collection("users")
-        .doc(newplan.userID)
-        .collection('newPlan')
-        .doc()
-        .set(
+    final newTaskPlan = firestoreDB.collection("users").doc(newplan.userID).collection('newPlan').doc().set(
           newPlan,
           SetOptions(merge: true),
         );
@@ -68,11 +59,7 @@ class FireStoreImpl implements FireStore {
     required UserModel user,
   }) async {
     final updates = <String, dynamic>{};
-    return await firestoreDB
-        .collection('users')
-        .doc(user.userID)
-        .update(updates)
-        .then((userDoc) {
+    return await firestoreDB.collection('users').doc(user.userID).update(updates).then((userDoc) {
       return true;
     }).onError((error, stackTrace) {
       return false;
@@ -102,8 +89,7 @@ class FireStoreImpl implements FireStore {
 
   @override
   Future getUser({required String userID}) async {
-    DocumentSnapshot user =
-        await firestoreDB.collection('users').doc(userID).get();
+    DocumentSnapshot user = await firestoreDB.collection('users').doc(userID).get();
     if (user.exists) {
       final userMap = user.data() as Map<String, dynamic>;
       UserModel userObject = UserModel.fromJson(userMap);
