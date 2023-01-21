@@ -13,6 +13,7 @@ class AppText {
 
   // New Page
   static const String addTaskText = 'Add Task';
+  static const String changeTaskText = 'Change Task';
   static const String addQuickNoteText = 'Add Quick Note';
   static const String addCheckListText = 'Add Check List';
 
@@ -23,6 +24,7 @@ class AppText {
   static const String description = 'Description';
   static const String dueData = 'Due Data';
   static const String addData = 'Add Data';
+  static const String addTime = 'Add Time';
 
   // Settings Page
   static const String light = 'Light';

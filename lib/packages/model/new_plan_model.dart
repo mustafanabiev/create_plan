@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-NewPlanModel authFromJson(Map docMap) =>
-    NewPlanModel.fromJson(docMap as Map<String, dynamic>);
-
 class NewPlanModel {
   NewPlanModel({
     this.userID,
+    this.taskID,
     this.taskTitle,
     this.taskDescription,
     this.taskDate,
@@ -13,13 +11,16 @@ class NewPlanModel {
   });
 
   String? userID;
+  String? taskID;
   String? taskTitle;
   String? taskDescription;
   String? taskDate;
   Timestamp? createdAt;
 
-  factory NewPlanModel.fromJson(Map<String, dynamic> json) => NewPlanModel(
-        userID: json['userID'] as String?,
+  factory NewPlanModel.fromJson({Map<String, dynamic>? json, String? taskID}) =>
+      NewPlanModel(
+        userID: json!['userID'] as String?,
+        taskID: taskID,
         taskTitle: json['tasktitle'] as String?,
         taskDescription: json['taskDescription'] as String?,
         taskDate: json['taskDate'] as String?,
