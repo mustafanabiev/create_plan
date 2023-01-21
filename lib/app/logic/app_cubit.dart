@@ -6,9 +6,18 @@ import 'package:flutter/material.dart';
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
-  AppCubit(this.themeService) : super(AppState(themeService.init()));
+  AppCubit(
+    this.localService,
+    this.themeService,
+  ) : super(AppState(localService.init(), themeService.init()));
 
+  final AppService localService;
   final ThemeService themeService;
+
+  Future<void> changeLang(int index) async {
+    final local = await localService.setLocale(index);
+    emit(state.copyWith(currentLocale: local));
+  }
 
   Future<void> changeMode({required bool isDark}) async {
     await themeService.setMode(isDark: isDark);

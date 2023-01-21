@@ -30,6 +30,9 @@ dependencies:
   google_sign_in: ^5.4.2
   syncfusion_flutter_gauges: ^20.4.43
   percent_indicator: ^4.2.2
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
 
 
 dev_dependencies:
@@ -41,8 +44,8 @@ dev_dependencies:
   flutter_gen_runner: ^5.1.0+1
 
 flutter:
-
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/images/

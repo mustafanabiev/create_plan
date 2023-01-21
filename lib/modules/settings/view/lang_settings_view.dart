@@ -1,3 +1,5 @@
+import 'package:create_plan/components/components.dart';
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class LangSettingsView extends StatelessWidget {
@@ -7,21 +9,11 @@ class LangSettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Сураныч тилди тандаңыз.'),
+        title: Text(context.l10n.helloWorld),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),
-        child: ListView.builder(
-          itemCount: 7,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                title: const Text('Кыргыз тили'),
-                onTap: () {},
-              ),
-            );
-          },
-        ),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),
+        child: SelectLangFromListViewBuilder(),
       ),
     );
   }
