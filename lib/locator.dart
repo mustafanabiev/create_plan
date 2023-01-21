@@ -27,7 +27,8 @@ Future<void> setup(
     ..registerFactory(() => HomeCubit())
     ..registerFactory(() => UserProfileCubit(userRepo: sl<UserRepo>()))
     ..registerFactory(
-      () => AuthenticationCubit(authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()),
+      () => AuthenticationCubit(
+          authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()),
     )
     ..registerFactory(() => NewPlanCubit(
           userRepo: sl<UserRepo>(),
@@ -42,6 +43,8 @@ Future<void> setup(
     ..registerLazySingleton<NewPlanRepo>(
       () => NewPlanRepoImpl(firestore: sl<FireStore>()),
     )
+    ..registerLazySingleton<AppService>(
+        () => AppService(sl<AppCache<String>>()))
     ..registerLazySingleton<ThemeService>(
       () => ThemeService(sl<AppCache<String>>()),
     )
