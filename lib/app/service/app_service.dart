@@ -29,8 +29,7 @@ class AppService {
   }
 
   Future<Locale> setLocale(int index) async {
-    await storage.save(
-        key: localStorageLocaleKey, value: _locales[index].languageCode);
+    await storage.save(key: localStorageLocaleKey, value: _locales[index].languageCode);
     return _locales[index];
   }
 
