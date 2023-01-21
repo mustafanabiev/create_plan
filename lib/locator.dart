@@ -27,8 +27,7 @@ Future<void> setup(
     ..registerFactory(() => HomeCubit())
     ..registerFactory(() => UserProfileCubit(userRepo: sl<UserRepo>()))
     ..registerFactory(
-      () => AuthenticationCubit(
-          authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()),
+      () => AuthenticationCubit(authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()),
     )
     ..registerFactory(() => NewPlanCubit(
           userRepo: sl<UserRepo>(),

@@ -9,15 +9,12 @@ class StreamBuilderWidget extends StatelessWidget {
     required this.builder,
     super.key,
   });
-  final Widget Function(
-      BuildContext, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>) builder;
+  final Widget Function(BuildContext, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>) builder;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: context
-          .read<NewPlanCubit>()
-          .getStreamUser(GetToken.getToken(context)),
+      stream: context.read<NewPlanCubit>().getStreamUser(GetToken.getToken(context)),
       builder: builder,
     );
   }

@@ -83,8 +83,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                               ],
                             );
                           } else {
-                            return const Center(
-                                child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           }
                         },
                       ),
