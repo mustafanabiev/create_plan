@@ -27,6 +27,10 @@ class AppTextStyle {
     fontWeight: FontWeight.w400,
   );
 
+  static TextStyle robotoText40w800 = GoogleFonts.roboto(
+    fontSize: 40,
+    fontWeight: FontWeight.w800,
+  );
   static TextStyle robotoTextColor30w800 = GoogleFonts.roboto(
     fontSize: 30,
     color: AppColors.textColor,
