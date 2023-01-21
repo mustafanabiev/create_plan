@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/core/core.dart';
 import 'package:create_plan/packages/packages.dart';
 import 'package:dartz/dartz.dart';
@@ -18,7 +17,6 @@ abstract class UserRepo {
   Future<Either<Failure, UserModel>> deleteUser({
     required String userID,
   });
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID);
 }
 
 class UserRepoImpl implements UserRepo {
@@ -82,8 +80,5 @@ class UserRepoImpl implements UserRepo {
     }
   }
 
-  @override
-  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID) {
-    return firestore.getStreamUser(userID);
-  }
+
 }

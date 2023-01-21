@@ -1,20 +1,17 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/packages/packages.dart';
 
 abstract class NewPlanRepo {
   Future<NewPlanModel> createNewPlan({
     required NewPlanModel newPlan,
   });
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID);
+  Future<NewPlanModel> updateNewPlan({required NewPlanModel newPlanModel});
   //   Future<Either<Failure, UserModel>> deleteUser({
   //   required String userID,
   // });
-  //   Future<Either<Failure, UserModel>> updateUser({
-  //   required BuildContext context,
-  //   required UserModel user,
-  // });
-  // Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser();
-
 }
 
 class NewPlanRepoImpl implements NewPlanRepo {
@@ -32,5 +29,17 @@ class NewPlanRepoImpl implements NewPlanRepo {
       log(e.toString());
     }
     return newPlan;
+  }
+
+  @override
+  Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID) {
+    return firestore.getStreamUser(userID);
+  }
+
+  @override
+  Future<NewPlanModel> updateNewPlan({
+    required NewPlanModel newPlanModel,
+  }) async {
+    return await firestore.updateNewPlan(newPlanModel: newPlanModel);
   }
 }
