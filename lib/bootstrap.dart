@@ -46,7 +46,9 @@ Future<void> bootstrap() async {
         providers: [
           BlocProvider(create: (context) => sl<TokenCubit>()),
           BlocProvider(create: (context) => sl<AuthenticationCubit>()),
-          BlocProvider(create: (context) => AppCubit(sl<ThemeService>())),
+          BlocProvider(
+            create: (context) => AppCubit(sl<AppService>(), sl<ThemeService>()),
+          ),
           BlocProvider(create: (context) => sl<HomeCubit>()),
           BlocProvider(create: (context) => sl<UserProfileCubit>()),
           BlocProvider(create: (context) => sl<NewPlanCubit>()),
