@@ -1,5 +1,4 @@
 import 'package:create_plan/components/components.dart';
-import 'package:create_plan/constants/app_token.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
@@ -27,8 +26,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home Page'),
       ),
-      body: StreamBuilder(
-        stream: context.read<NewPlanCubit>().getStreamUser(GetToken.getToken(context)),
+      body: StreamBuilderWidget(
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final messages = (snapshot.data!.docs).map(
@@ -36,17 +34,19 @@ class HomeView extends StatelessWidget {
             );
             return ListView(
               children: messages
-                  .map((e) => NewPlanCard(
-                        data: e,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomeDetailPage(e),
-                            ),
-                          );
-                        },
-                      ))
+                  .map(
+                    (e) => NewPlanCard(
+                      data: e,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomeDetailPage(e),
+                          ),
+                        );
+                      },
+                    ),
+                  )
                   .toList(),
             );
           } else {

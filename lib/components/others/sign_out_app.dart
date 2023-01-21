@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignOutApp extends StatelessWidget {
-  const SignOutApp({
-    Key? key,
-  }) : super(key: key);
+  const SignOutApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +13,9 @@ class SignOutApp extends StatelessWidget {
       child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
         builder: (context, state) {
           return IconButton(
-            onPressed: () {
-              context.read<AuthenticationCubit>().signOut(context);
-            },
-            icon: const Icon(
-              Icons.logout,
-              color: AppColors.red,
-            ),
+            onPressed: () =>
+                context.read<AuthenticationCubit>().signOut(context),
+            icon: const Icon(Icons.logout, color: AppColors.red),
           );
         },
       ),

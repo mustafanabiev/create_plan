@@ -16,14 +16,14 @@ class CardText extends StatelessWidget {
       children: [
         Text(
           text,
+          style: const TextStyle(fontSize: 18),
+        ),
+        Text(
+          text2,
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-        ),
-        Text(
-          text2,
-          style: const TextStyle(fontSize: 18),
         ),
       ],
     );

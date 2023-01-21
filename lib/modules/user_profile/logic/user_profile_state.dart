@@ -1,6 +1,25 @@
 part of 'user_profile_cubit.dart';
 
-@immutable
-abstract class UserProfileState {}
+class UserProfileState {
+  const UserProfileState({
+    this.signUpState,
+    this.authFailureState,
+    this.isLoading = false,
+  });
 
-class UserProfileInitial extends UserProfileState {}
+  final UserModel? signUpState;
+  final Failure? authFailureState;
+  final bool? isLoading;
+
+  UserProfileState copyWith({
+    UserModel? signUpState,
+    Failure? authFailureState,
+    bool isLoading = false,
+  }) {
+    return UserProfileState(
+      signUpState: signUpState ?? this.signUpState,
+      authFailureState: authFailureState ?? this.authFailureState,
+      isLoading: isLoading,
+    );
+  }
+}

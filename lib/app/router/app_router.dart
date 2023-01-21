@@ -1,5 +1,4 @@
 import 'package:create_plan/app/app.dart';
-import 'package:create_plan/modules/authentication/view/sign_in_page.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,8 +18,16 @@ class AppRouter {
         builder: (context, state) => const MainView(),
         routes: [
           GoRoute(
+            path: 'lang',
+            builder: (context, state) => const LangSettingsView(),
+          ),
+          GoRoute(
             path: 'theme',
             builder: (context, state) => const ThemeSettingsView(),
+          ),
+          GoRoute(
+            path: 'aboutUs',
+            builder: (context, state) => const AboutUsView(),
           ),
           GoRoute(
             path: 'newPlan',

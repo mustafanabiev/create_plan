@@ -25,9 +25,10 @@ Future<void> setup(
   sl
     ..registerFactory(() => TokenCubit(tService: sl<TokenService>()))
     ..registerFactory(() => HomeCubit())
-    ..registerFactory(() => UserProfileCubit())
+    ..registerFactory(() => UserProfileCubit(userRepo: sl<UserRepo>()))
     ..registerFactory(
-      () => AuthenticationCubit(authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()),
+      () => AuthenticationCubit(
+          authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()),
     )
     ..registerFactory(() => NewPlanCubit(
           userRepo: sl<UserRepo>(),

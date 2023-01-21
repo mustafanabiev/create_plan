@@ -13,57 +13,6 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     required this.userRepo,
   }) : super(const AuthenticationState());
 
-  void signIn(BuildContext context, String email, String password) async {
-    emit(state.copyWith(isLoading: true));
-
-    final user = await authRepo.signIn(
-      context: context,
-      email: email,
-      password: password,
-    );
-    await user.fold(
-      (error) async => emit(state.copyWith(authFailureState: error)),
-      (userCredential) async {
-        final user = await userRepo.createNewUser(
-          user: UserModel(
-            userID: userCredential!.user!.uid,
-          ),
-        );
-        user.fold(
-          (error) => emit(state.copyWith(authFailureState: error)),
-          (user) => emit(state.copyWith(signUpState: user)),
-        );
-      },
-    );
-  }
-
-  void signUp(BuildContext context, String email, String password) async {
-    emit(state.copyWith(isLoading: true));
-
-    final user = await authRepo.signUp(
-      context: context,
-      email: email,
-      password: password,
-    );
-    user.fold(
-      (error) => emit(state.copyWith(authFailureState: error)),
-      (userCredential) async {
-        final user = await userRepo.createNewUser(
-          user: UserModel(
-            userID: userCredential!.user!.uid,
-            email: email,
-            password: password,
-          ),
-        );
-
-        user.fold(
-          (error) => emit(state.copyWith(authFailureState: error)),
-          (user) => emit(state.copyWith(signUpState: user)),
-        );
-      },
-    );
-  }
-
   void signInWithGoogle(BuildContext context) async {
     final user = await authRepo.signInWithGoogle(context: context);
     user.fold(
