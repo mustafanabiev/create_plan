@@ -3,5 +3,5 @@ class AppRouterConstants {
   static const String user = 'user';
   static const String userProfile = 'userProfile';
   static const String login = 'login';
-  static const String homeDetail= 'homeDetail';
+  static const String homeDetail = 'homeDetail';
 }

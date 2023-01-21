@@ -17,8 +17,7 @@ class NewPlanModel {
   String? taskDate;
   Timestamp? createdAt;
 
-  factory NewPlanModel.fromJson({Map<String, dynamic>? json, String? taskID}) =>
-      NewPlanModel(
+  factory NewPlanModel.fromJson({Map<String, dynamic>? json, String? taskID}) => NewPlanModel(
         userID: json!['userID'] as String?,
         taskID: taskID,
         taskTitle: json['tasktitle'] as String?,

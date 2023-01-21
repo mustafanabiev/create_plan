@@ -101,8 +101,7 @@ class NewPlanView extends StatelessWidget {
                       if (fromKey.currentState!.validate()) {
                         titleController.clear;
                         descController.clear;
-                        if (titleController.text.isNotEmpty &&
-                            descController.text.isNotEmpty) {
+                        if (titleController.text.isNotEmpty && descController.text.isNotEmpty) {
                           context.read<NewPlanCubit>().createNewPlan(
                                   newPlan: NewPlanModel(
                                 userID: GetToken.getToken(context),
