@@ -13,8 +13,7 @@ class SignOutApp extends StatelessWidget {
       child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
         builder: (context, state) {
           return IconButton(
-            onPressed: () =>
-                context.read<AuthenticationCubit>().signOut(context),
+            onPressed: () => context.read<AuthenticationCubit>().signOut(context),
             icon: const Icon(Icons.logout, color: AppColors.red),
           );
         },
