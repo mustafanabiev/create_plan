@@ -12,9 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      locale: context.watch<AppCubit>().state.currentLocale,
       theme: context.watch<AppCubit>().state.theme.themeData,
       routerConfig: router,
-      locale: context.watch<AppCubit>().state.currentLocale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );
