@@ -1,3 +1,4 @@
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsView extends StatelessWidget {
@@ -7,7 +8,7 @@ class AboutUsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About Us'),
+        title: Text(context.l10n.aboutUs),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 20),

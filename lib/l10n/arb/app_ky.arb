@@ -1,7 +1,31 @@
 {
+  "@@locale": "ky",
   "homePage": "Башкы бет",
-  "helloWorld": "Салам Дуйно",
+  "taskPage": "Тапшырма бети",
+  "home": "Үй",
+  "profile": "Профиль",
+  "language": "Тил",
+  "theme": "Тема",
+  "aboutUs": "Биз жөнүндө",
+  "themePage": "Тема баракчасы",
+  "addTask": "Тапшырма кошуу",
+  "addQuickNote": "Эскертуу кошуу",
+  "addCheckList": "Текшерүү тизмесин кошуу",
+  "newTask": "Жаңы тапшырма",
+  "title": "Аталышы",
+  "task": "Тапшырма",
+  "description": "Сүрөттөмө",
+  "dueDate": "Бүтүмдүк дата",
+  "addDate": "Дата кошуу",
+  "addTime": "Убакыт кошуу",
+  "changeTask": "Тапшырма өзгөртүү",
+  "createTask": "Тапшырма түзүү",
+  "complatedTask": "Аткарылган тапшырма",
+  "statistic": "Статистика",
+  "events": "Окуялар",
+  "toDo": "Кылуу",
+  "quickNotes": "Тез Жазуулар",
   "@helloWorld": {
-    "description": "Кадимки жаңы төрөлгөн программист салам"
+    "description": "The conventional newborn programmer greeting"
   }
 }

@@ -1,6 +1,7 @@
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,15 +48,15 @@ class _SettingViewState extends State<SettingView> {
           ),
           ListTile(
             onTap: () => context.go('/lang'),
-            title: Text('Language', style: AppTextStyle.roboto16w500),
+            title: Text(context.l10n.language, style: AppTextStyle.roboto16w500),
           ),
           ListTile(
             onTap: () => context.go('/theme'),
-            title: Text('Theme', style: AppTextStyle.roboto16w500),
+            title: Text(context.l10n.theme, style: AppTextStyle.roboto16w500),
           ),
           ListTile(
             onTap: () => context.go('/aboutUs'),
-            title: Text('About Us', style: AppTextStyle.roboto16w500),
+            title: Text(context.l10n.aboutUs, style: AppTextStyle.roboto16w500),
           ),
         ],
       ),

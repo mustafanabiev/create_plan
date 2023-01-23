@@ -1,0 +1,31 @@
+{
+  "@@locale": "ru",
+  "homePage": "Главная страница",
+  "taskPage": "Страница задач",
+  "home": "Дом",
+  "profile": "Профиль",
+  "language": "Язык",
+  "theme": "Тема",
+  "aboutUs": "О нас",
+  "themePage": "Тематическая страница",
+  "addTask": "Добавить задачу",
+  "addQuickNote": "Добавить быструю заметку",
+  "addCheckList": "Добавить контрольный список",
+  "newTask": "Новое задание",
+  "title": "Заголовок",
+  "task": "Задача",
+  "description": "Описание",
+  "dueDate": "Срок",
+  "addDate": "Добавить дату",
+  "addTime": "Добавить время",
+  "changeTask": "Изменить задачу",
+  "createTask": "Создать задачу",
+  "complatedTask": "Завершенная задача",
+  "statistic": "Статистика",
+  "events": "События",
+  "toDo": "Делать",
+  "quickNotes": "Быстрые заметки",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
+}

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/packages/model/model.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +32,12 @@ class HomeDetailView extends StatelessWidget {
     final descController = TextEditingController(text: newData.taskDescription);
     final taskDate =
         '${newData.createdAt!.toDate().day}.${newData.createdAt!.toDate().month}.${newData.createdAt!.toDate().year}';
-    final taskTime = '${newData.createdAt!.toDate().hour}:${newData.createdAt!.toDate().minute}';
+    final taskTime =
+        '${newData.createdAt!.toDate().hour}:${newData.createdAt!.toDate().minute}';
     return Scaffold(
       backgroundColor: const Color(0xffFDFDFD),
       appBar: AppBar(
-        title: const Text('HomeDetail'),
+        title: Text(context.l10n.taskPage),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -47,19 +49,19 @@ class HomeDetailView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  AppText.title,
+                  context.l10n.title,
                   style: AppTextStyle.roboto18w500,
                 ),
                 AppSpace.sized10,
                 AppTextFormField(
                   controller: titleController,
                   obscureText: false,
-                  labelText: AppText.task,
+                  labelText: context.l10n.title,
                   maxLines: 1,
                 ),
                 AppSpace.sized20,
                 Text(
-                  AppText.description,
+                  context.l10n.description,
                   style: AppTextStyle.robotoTGrey18w500,
                 ),
                 AppSpace.sized10,
@@ -67,7 +69,7 @@ class HomeDetailView extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   controller: descController,
                   obscureText: false,
-                  hintText: AppText.description,
+                  hintText: context.l10n.description,
                   hintStyle: AppTextStyle.robotoTGrey16w500,
                   maxLines: 4,
                   border: OutlineInputBorder(
@@ -79,13 +81,13 @@ class HomeDetailView extends StatelessWidget {
                   onPressed: () {},
                   dateOrTime: taskDate,
                   iconBtn: Icons.calendar_month,
-                  titleBtn: AppText.addData,
+                  titleBtn: context.l10n.addDate,
                 ),
                 TaskDateAndTimeWidget(
                   onPressed: () {},
                   dateOrTime: taskTime,
                   iconBtn: Icons.schedule,
-                  titleBtn: AppText.addTime,
+                  titleBtn: context.l10n.addTime,
                 ),
                 AppSpace.sized20,
                 Center(
@@ -100,7 +102,8 @@ class HomeDetailView extends StatelessWidget {
                       if (fromKey.currentState!.validate()) {
                         titleController.clear;
                         descController.clear;
-                        if (titleController.text.isNotEmpty && descController.text.isNotEmpty) {
+                        if (titleController.text.isNotEmpty &&
+                            descController.text.isNotEmpty) {
                           context.read<NewPlanCubit>().updateNewPlan(
                                   newPlanModel: NewPlanModel(
                                 userID: GetToken.getToken(context),
@@ -116,7 +119,7 @@ class HomeDetailView extends StatelessWidget {
                       FocusManager.instance.primaryFocus?.unfocus();
                     },
                     child: Text(
-                      AppText.changeTaskText,
+                      context.l10n.changeTask,
                       style: AppTextStyle.roboto16w500,
                     ),
                   ),
