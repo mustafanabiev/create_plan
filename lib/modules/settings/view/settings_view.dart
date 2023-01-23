@@ -23,6 +23,7 @@ class _SettingViewState extends State<SettingView> {
 
   @override
   Widget build(BuildContext context) {
+    final appCubit = context.watch<AppCubit>();
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.zero,
@@ -48,7 +49,17 @@ class _SettingViewState extends State<SettingView> {
           ),
           ListTile(
             onTap: () => context.go('/lang'),
-            title: Text(context.l10n.language, style: AppTextStyle.roboto16w500),
+            title:
+                Text(context.l10n.language, style: AppTextStyle.roboto16w500),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(appCubit.localService
+                    .getName(appCubit.state.currentLocale.toLanguageTag())),
+                const SizedBox(width: 17),
+                const Icon(Icons.arrow_forward_ios),
+              ],
+            ),
           ),
           ListTile(
             onTap: () => context.go('/theme'),

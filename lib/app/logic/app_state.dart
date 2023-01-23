@@ -10,7 +10,7 @@ class AppState extends Equatable {
   final CustomTheme theme;
 
   @override
-  List<Object?> get props => [theme];
+  List<Object?> get props => [currentLocale, theme];
 
   AppState copyWith({Locale? currentLocale, CustomTheme? theme}) {
     return AppState(
