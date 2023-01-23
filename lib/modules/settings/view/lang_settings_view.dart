@@ -9,7 +9,7 @@ class LangSettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.helloWorld),
+        title: Text(context.l10n.language),
       ),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 14, vertical: 20),

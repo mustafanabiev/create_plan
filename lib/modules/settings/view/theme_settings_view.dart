@@ -1,4 +1,5 @@
 import 'package:create_plan/app/app.dart';
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +11,7 @@ class ThemeSettingsView extends StatelessWidget {
     final appCubit = context.watch<AppCubit>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Theme Page'),
+        title: Text(context.l10n.themePage),
         actions: [
           IconButton(
             key: const Key('settings-theme-theme-button'),

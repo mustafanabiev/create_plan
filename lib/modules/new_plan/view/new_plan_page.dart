@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:create_plan/locator.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/packages/model/model.dart';
@@ -33,7 +34,7 @@ class NewPlanView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xffFDFDFD),
       appBar: AppBar(
-        title: const Text(AppText.newTask),
+        title: Text(context.l10n.newTask),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -45,19 +46,19 @@ class NewPlanView extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  AppText.title,
+                  context.l10n.title,
                   style: AppTextStyle.roboto18w500,
                 ),
                 AppSpace.sized10,
                 AppTextFormField(
                   controller: titleController,
                   obscureText: false,
-                  labelText: AppText.task,
+                  labelText: context.l10n.title,
                   maxLines: 1,
                 ),
                 AppSpace.sized20,
                 Text(
-                  AppText.description,
+                  context.l10n.description,
                   style: AppTextStyle.robotoTGrey18w500,
                 ),
                 AppSpace.sized10,
@@ -65,7 +66,7 @@ class NewPlanView extends StatelessWidget {
                   keyboardType: TextInputType.multiline,
                   controller: descController,
                   obscureText: false,
-                  hintText: AppText.description,
+                  hintText: context.l10n.description,
                   hintStyle: AppTextStyle.robotoTGrey16w500,
                   maxLines: 4,
                   border: OutlineInputBorder(
@@ -77,14 +78,14 @@ class NewPlanView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      AppText.dueData,
+                      context.l10n.dueDate,
                       style: AppTextStyle.robotoTGreyFromARGB18w500,
                     ),
                     TextButton.icon(
                       autofocus: true,
                       onPressed: () {},
                       icon: const Icon(Icons.calendar_month),
-                      label: const Text(AppText.addData),
+                      label: Text(context.l10n.addDate),
                     ),
                   ],
                 ),
@@ -116,7 +117,7 @@ class NewPlanView extends StatelessWidget {
                       FocusManager.instance.primaryFocus?.unfocus();
                     },
                     child: Text(
-                      AppText.addTaskText,
+                      context.l10n.addTask,
                       style: AppTextStyle.roboto16w500,
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:create_plan/components/components.dart';
 import 'package:create_plan/constants/constants.dart';
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:create_plan/locator.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:create_plan/packages/packages.dart';
@@ -36,7 +37,7 @@ class _UserProfileViewState extends State<UserProfileView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppText.profile),
+        title: Text(context.l10n.profile),
         centerTitle: true,
       ),
       body: Padding(
@@ -69,21 +70,23 @@ class _UserProfileViewState extends State<UserProfileView> {
                       StreamBuilderWidget(
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CardText(
-                                  text: 'Create Task',
+                                CardText2(
+                                  text: context.l10n.createTask,
                                   text2: '${snapshot.data!.docs.length}',
                                 ),
-                                CardText(
-                                  text: 'Complated Task',
+                                CardText2(
+                                  text: context.l10n.complatedTask,
                                   text2: '${snapshot.data!.docs.length}',
                                 ),
                               ],
                             );
                           } else {
-                            return const Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
                         },
                       ),
@@ -97,11 +100,11 @@ class _UserProfileViewState extends State<UserProfileView> {
             AppSpace.sized20,
             CardPaddingWidget(
               widget: [
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    AppText.statistic,
-                    style: TextStyle(
+                    context.l10n.statistic,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),

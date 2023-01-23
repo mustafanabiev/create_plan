@@ -1,4 +1,5 @@
 import 'package:create_plan/components/components.dart';
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,16 +46,16 @@ class MainScreen extends StatelessWidget {
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: context.read<MainCubit>().change,
         selectedIndex: context.watch<MainCubit>().state,
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            key: Key('home'),
-            icon: Icon(Icons.home),
-            label: 'Home',
+            key: const Key('home'),
+            icon: const Icon(Icons.home),
+            label: context.l10n.home,
           ),
           NavigationDestination(
-            key: Key('profile'),
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            key: const Key('profile'),
+            icon: const Icon(Icons.person),
+            label: context.l10n.profile,
           ),
         ],
       ),
