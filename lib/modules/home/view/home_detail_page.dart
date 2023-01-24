@@ -32,8 +32,7 @@ class HomeDetailView extends StatelessWidget {
     final descController = TextEditingController(text: newData.taskDescription);
     final taskDate =
         '${newData.createdAt!.toDate().day}.${newData.createdAt!.toDate().month}.${newData.createdAt!.toDate().year}';
-    final taskTime =
-        '${newData.createdAt!.toDate().hour}:${newData.createdAt!.toDate().minute}';
+    final taskTime = '${newData.createdAt!.toDate().hour}:${newData.createdAt!.toDate().minute}';
     return Scaffold(
       backgroundColor: const Color(0xffFDFDFD),
       appBar: AppBar(
@@ -102,8 +101,7 @@ class HomeDetailView extends StatelessWidget {
                       if (fromKey.currentState!.validate()) {
                         titleController.clear;
                         descController.clear;
-                        if (titleController.text.isNotEmpty &&
-                            descController.text.isNotEmpty) {
+                        if (titleController.text.isNotEmpty && descController.text.isNotEmpty) {
                           context.read<NewPlanCubit>().updateNewPlan(
                                   newPlanModel: NewPlanModel(
                                 userID: GetToken.getToken(context),

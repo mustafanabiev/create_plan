@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:create_plan/core/core.dart';
 
-
 class AppService {
   const AppService(this.storage);
 
