@@ -13,10 +13,7 @@ class SelectLangFromListViewBuilder extends StatelessWidget {
       itemCount: appCubit.localService.locales.length,
       itemBuilder: (BuildContext context, int index) {
         final locale = context.read<AppCubit>().localService.locales[index];
-        final langName = context
-            .read<AppCubit>()
-            .localService
-            .getName(locale.toLanguageTag());
+        final langName = context.read<AppCubit>().localService.getName(locale.toLanguageTag());
         return Card(
           child: ListTile(
             title: Text(langName, locale: locale),
