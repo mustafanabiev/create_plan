@@ -45,4 +45,9 @@ class NewPlanCubit extends Cubit<NewPlanState> {
     emit(state.copyWith(isLoading: true));
     await newPlanRepo.updateNewPlan(newPlanModel: newPlanModel!);
   }
+
+  void deleteNewPlan({required String userID, required String planID}) async{
+    emit(state.copyWith(isLoading: true));
+    await newPlanRepo.deleteUser(userID: userID, planID: planID);
+  }
 }
