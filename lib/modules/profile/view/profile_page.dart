@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserProfilePage extends StatelessWidget {
-  const UserProfilePage({Key? key}) : super(key: key);
+  const UserProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class UserProfilePage extends StatelessWidget {
 }
 
 class UserProfileView extends StatefulWidget {
-  const UserProfileView({Key? key}) : super(key: key);
+  const UserProfileView({super.key});
 
   @override
   State<UserProfileView> createState() => _UserProfileViewState();
