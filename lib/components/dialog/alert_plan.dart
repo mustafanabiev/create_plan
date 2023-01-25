@@ -47,13 +47,10 @@ class AlertButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoButton(
       onPressed: onPressed,
-      child: SizedBox(
-        width: 200,
-        child: Text(
-          text,
-          style: AppTextStyle.roboto18w500,
-          textAlign: TextAlign.center,
-        ),
+      child: Text(
+        text,
+        style: AppTextStyle.roboto18w500,
+        textAlign: TextAlign.center,
       ),
     );
   }

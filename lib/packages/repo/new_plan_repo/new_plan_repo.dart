@@ -9,9 +9,7 @@ abstract class NewPlanRepo {
   });
   Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID);
   Future<NewPlanModel> updateNewPlan({required NewPlanModel newPlanModel});
-  //   Future<Either<Failure, UserModel>> deleteUser({
-  //   required String userID,
-  // });
+  Future<dynamic> deleteUser({required String userID, required String planID});
 }
 
 class NewPlanRepoImpl implements NewPlanRepo {
@@ -41,5 +39,10 @@ class NewPlanRepoImpl implements NewPlanRepo {
     required NewPlanModel newPlanModel,
   }) async {
     return await firestore.updateNewPlan(newPlanModel: newPlanModel);
+  }
+
+  @override
+  Future deleteUser({required String userID, required String planID}) async {
+    return await firestore.deleteNewPlan(userID: userID, planID: planID);
   }
 }

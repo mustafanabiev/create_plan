@@ -3,3 +3,4 @@ export 'input/input.dart';
 export 'others/others.dart';
 export 'dialog/alert_plan.dart';
 export 'card/card.dart';
+export 'dialog/alert_delete_task.dart';
