@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/packages/packages.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ abstract class FireStore<T> {
   Future<bool> createNewUser({required UserModel user});
   Future<T> createNewPlan({required NewPlanModel newplan});
   Future<T> getUser({required String userID});
+  Future<T> deleteNewPlan({required String userID, required String planID});
   Stream<QuerySnapshot<Map<String, dynamic>>> getStreamUser(String userID);
   Future<bool> updateUser({
     required BuildContext context,
@@ -21,7 +24,11 @@ class FireStoreImpl implements FireStore {
 
   @override
   Future<bool> createNewUser({required UserModel user}) async {
-    return await firestoreDB.collection("users").doc(user.userID).get().then((userDoc) {
+    return await firestoreDB
+        .collection("users")
+        .doc(user.userID)
+        .get()
+        .then((userDoc) {
       final newUser = UserModel(
         userID: user.userID,
         name: user.name,
@@ -46,7 +53,12 @@ class FireStoreImpl implements FireStore {
   Future createNewPlan({required NewPlanModel newplan}) async {
     final newPlan = newplan.toJson();
 
-    final newTaskPlan = firestoreDB.collection("users").doc(newplan.userID).collection('newPlan').doc().set(
+    final newTaskPlan = firestoreDB
+        .collection("users")
+        .doc(newplan.userID)
+        .collection('newPlan')
+        .doc()
+        .set(
           newPlan,
           SetOptions(merge: true),
         );
@@ -59,7 +71,11 @@ class FireStoreImpl implements FireStore {
     required UserModel user,
   }) async {
     final updates = <String, dynamic>{};
-    return await firestoreDB.collection('users').doc(user.userID).update(updates).then((userDoc) {
+    return await firestoreDB
+        .collection('users')
+        .doc(user.userID)
+        .update(updates)
+        .then((userDoc) {
       return true;
     }).onError((error, stackTrace) {
       return false;
@@ -89,7 +105,8 @@ class FireStoreImpl implements FireStore {
 
   @override
   Future getUser({required String userID}) async {
-    DocumentSnapshot user = await firestoreDB.collection('users').doc(userID).get();
+    DocumentSnapshot user =
+        await firestoreDB.collection('users').doc(userID).get();
     if (user.exists) {
       final userMap = user.data() as Map<String, dynamic>;
       UserModel userObject = UserModel.fromJson(userMap);
@@ -107,5 +124,19 @@ class FireStoreImpl implements FireStore {
         .collection('newPlan')
         .orderBy('createdAt', descending: true)
         .snapshots();
+  }
+
+  @override
+  Future deleteNewPlan({required String userID, required String planID}) async {
+    await firestoreDB
+        .collection('users')
+        .doc(userID)
+        .collection('newPlan')
+        .doc(planID)
+        .delete()
+        .then(
+          (doc) => log("Document deleted ===========> Document deleted"),
+          onError: (e) => log("Error updating document $e"),
+        );
   }
 }
