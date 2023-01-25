@@ -40,11 +40,12 @@ class HomeDetailView extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () => showMyDialog(
-                context,
-                AlertDeleteTask(
-                  userID: newData.userID!,
-                  planID: newData.taskID!,
-                )),
+              context,
+              AlertDeleteTask(
+                userID: newData.userID!,
+                planID: newData.taskID!,
+              ),
+            ),
             icon: const Icon(Icons.delete, color: Colors.red),
           ),
         ],

@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class NewPlanPage extends StatelessWidget {
-  const NewPlanPage({Key? key}) : super(key: key);
+  const NewPlanPage({super.key});
 
   @override
   Widget build(BuildContext context) {

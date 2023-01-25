@@ -22,7 +22,7 @@ class SignInPage extends StatelessWidget {
 }
 
 class SignInView extends StatelessWidget {
-  const SignInView({Key? key}) : super(key: key);
+  const SignInView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

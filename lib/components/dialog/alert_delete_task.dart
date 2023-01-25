@@ -1,4 +1,5 @@
 import 'package:create_plan/app/app.dart';
+import 'package:create_plan/l10n/l10n.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,15 +18,15 @@ class AlertDeleteTask extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Do you want to delete the task?',
+          context.l10n.deleteTask,
           style: AppTextStyle.roboto18w500,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextButton(
-              onPressed: () => Navigator.pop(context, 'Cancel'),
-              child: const Text('Cancel'),
+              onPressed: () => Navigator.pop(context),
+              child: Text(context.l10n.cancel),
             ),
             TextButton(
               onPressed: () {
@@ -40,7 +41,7 @@ class AlertDeleteTask extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text('OK'),
+              child: Text(context.l10n.ok),
             ),
           ],
         ),
