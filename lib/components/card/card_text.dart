@@ -32,10 +32,10 @@ class CardText extends StatelessWidget {
 
 class CardText2 extends StatelessWidget {
   const CardText2({
-    Key? key,
+    super.key,
     required this.text,
     required this.text2,
-  }) : super(key: key);
+  });
   final String text;
   final String text2;
 
