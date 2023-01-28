@@ -1,9 +1,7 @@
 import 'package:create_plan/app/app.dart';
 import 'package:create_plan/components/components.dart';
-import 'package:create_plan/constants/constants.dart';
 import 'package:create_plan/gen/assets.gen.dart';
 import 'package:create_plan/l10n/l10n.dart';
-import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +34,7 @@ class _SettingViewState extends State<SettingView> {
               children: [
                 const SignOutApp(),
                 Text(
-                  AppText.kg,
+                  context.l10n.kg,
                   style: AppTextStyle.robotoTextColorWhite22w500,
                 ),
               ],
