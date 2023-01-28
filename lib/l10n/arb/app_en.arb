@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
   "homePage": "Home Page",
-  "helloWorld": "Hello World!",
+  "kg": "Kyrgyzstan",
   "taskPage": "Task Page",
   "deleteTask": "Do you want to delete the task?",
   "cancel": "Cancel",
