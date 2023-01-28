@@ -22,6 +22,7 @@ class AppText {
   static const String addTime = 'Add Time';
 
   // Settings Page
+  static const String kg = 'Кыргызстан';
   static const String light = 'Light';
   static const String dark = 'Dark';
 
