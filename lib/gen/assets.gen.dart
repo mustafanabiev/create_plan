@@ -13,8 +13,7 @@ class $AssetsImagesGen {
   const $AssetsImagesGen();
 
   /// File path: assets/images/drawer_photo.jpeg
-  AssetGenImage get drawerPhoto =>
-      const AssetGenImage('assets/images/drawer_photo.jpeg');
+  AssetGenImage get drawerPhoto => const AssetGenImage('assets/images/drawer_photo.jpeg');
 
   /// File path: assets/images/google.png
   AssetGenImage get google => const AssetGenImage('assets/images/google.png');
