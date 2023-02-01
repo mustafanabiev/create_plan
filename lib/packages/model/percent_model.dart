@@ -1,29 +1,20 @@
-class Percent {
-  const Percent({
-    required this.name,
-    required this.text,
-    required this.percent,
-  });
+import 'package:flutter/material.dart';
 
+class PricePoint {
+  PricePoint({
+    required this.name,
+    required this.percent,
+    required this.color,
+  });
   final String name;
-  final String text;
   final double percent;
+  final Color color;
 }
 
-const p1 = Percent(
-  name: 'Events',
-  text: '60',
-  percent: 0.6,
-);
-const p2 = Percent(
-  name: 'To Do',
-  text: '40',
-  percent: 0.4,
-);
-const p3 = Percent(
-  name: 'Quick Notes',
-  text: '80',
-  percent: 0.8,
-);
-
-List<Percent> percents = [p1, p2, p3];
+class PieData {
+  static List<PricePoint> data = [
+    PricePoint(name: 'Blue', percent: 20, color: Colors.blue),
+    PricePoint(name: 'Red', percent: 60, color: Colors.red),
+    PricePoint(name: 'Green', percent: 20, color: Colors.green),
+  ];
+}

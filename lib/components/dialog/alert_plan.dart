@@ -2,10 +2,10 @@ import 'package:create_plan/app/app.dart';
 import 'package:create_plan/l10n/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class AlertNewPlan extends StatelessWidget {
-  const AlertNewPlan({super.key});
+  const AlertNewPlan({super.key, required this.onPressed});
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +13,38 @@ class AlertNewPlan extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         AlertButton(
-          onPressed: () {
-            context.go('/newPlan');
-            Navigator.pop(context);
-          },
+          onPressed: onPressed,
           text: context.l10n.addTask,
         ),
         const Divider(
           color: AppColors.dividerColor,
         ),
         AlertButton(
-          onPressed: () {
-            context.go('/newPlan');
-            Navigator.pop(context);
-          },
+          onPressed: onPressed,
           text: context.l10n.addQuickNote,
+        ),
+      ],
+    );
+  }
+}
+
+class AlertSignOut extends StatelessWidget {
+  const AlertSignOut({super.key, required this.onPressed});
+  final void Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        AlertButton(
+          onPressed: () => Navigator.pop(context),
+          text: 'Назад',
+        ),
+        AlertButton(
+          onPressed: onPressed,
+          text: 'Ок',
         ),
       ],
     );
