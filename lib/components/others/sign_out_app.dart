@@ -17,8 +17,7 @@ class SignOutApp extends StatelessWidget {
             onPressed: () => showMyDialog(
               context,
               AlertSignOut(
-                onPressed: () =>
-                    context.read<AuthenticationCubit>().signOut(context),
+                onPressed: () => context.read<AuthenticationCubit>().signOut(context),
               ),
             ),
             icon: const Icon(Icons.logout, color: AppColors.red),
