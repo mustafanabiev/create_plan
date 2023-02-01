@@ -3,6 +3,7 @@ import 'package:create_plan/l10n/l10n.dart';
 import 'package:create_plan/modules/modules.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -38,7 +39,12 @@ class MainScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => showMyDialog(
           context,
-          const AlertNewPlan(),
+          AlertNewPlan(
+            onPressed: () {
+              context.go('/newPlan');
+              Navigator.pop(context);
+            },
+          ),
         ),
         child: const Icon(Icons.add),
       ),
