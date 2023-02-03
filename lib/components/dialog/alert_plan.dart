@@ -1,4 +1,5 @@
 import 'package:create_plan/app/app.dart';
+import 'package:create_plan/constants/constants.dart';
 import 'package:create_plan/l10n/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,11 +41,11 @@ class AlertSignOut extends StatelessWidget {
       children: [
         AlertButton(
           onPressed: () => Navigator.pop(context),
-          text: 'Назад',
+          text: AppText.back,
         ),
         AlertButton(
           onPressed: onPressed,
-          text: 'Ок',
+          text: AppText.ok,
         ),
       ],
     );
