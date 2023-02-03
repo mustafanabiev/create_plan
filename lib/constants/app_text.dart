@@ -25,6 +25,8 @@ class AppText {
   static const String kg = 'Кыргызстан';
   static const String light = 'Light';
   static const String dark = 'Dark';
+  static const String ok = 'Ок';
+  static const String back = 'Назад';
 
   // user profile page
   static const String profile = 'Profiles';
