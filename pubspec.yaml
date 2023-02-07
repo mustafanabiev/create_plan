@@ -15,8 +15,6 @@ dependencies:
   firebase_core: ^2.4.0
   bloc: ^8.1.0
   meta: ^1.8.0
-  flutter_driver:
-    sdk: flutter
   go_router: ^5.2.4
   firebase_auth: ^4.2.0
   hive: ^2.2.3
@@ -39,9 +37,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  flutter_lints: ^2.0.0
-  build_runner:
+  flutter_driver:
+    sdk: flutter
+  test: ^1.22.0
+  very_good_analysis: ^3.1.0
+  mocktail: ^0.3.0
+  build_runner: ^2.3.3
   flutter_gen_runner: ^5.1.0+1
 
 flutter:
