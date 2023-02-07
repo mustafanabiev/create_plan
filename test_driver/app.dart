@@ -17,5 +17,5 @@ Future<void> main() async {
       return Future.value(result);
     },
   );
-  app.main();
+  await app.main();
 }

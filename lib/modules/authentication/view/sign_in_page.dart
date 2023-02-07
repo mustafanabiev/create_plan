@@ -31,6 +31,7 @@ class SignInView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
+              key: const Key('login-select-view'),
               AppText.createPlan,
               style: AppTextStyle.robotoText40w800,
             ),
@@ -56,6 +57,7 @@ class SignInView extends StatelessWidget {
               },
               builder: (context, state) {
                 return ElevatedButton.icon(
+                  key: Key('login-button'),
                   onPressed: () {
                     context.read<AuthenticationCubit>().signInWithGoogle(context);
                   },
