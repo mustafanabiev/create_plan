@@ -45,7 +45,7 @@ class SignInView extends StatelessWidget {
                   if (state.signUpState!.userID != null) {
                     await context.read<TokenCubit>().save(state.signUpState!.userID!);
                   } else {
-                    log('');
+                    log('Error error');
                   }
                 } else if (state.authFailureState != null) {
                   AppSnackBar.instance.snack(
