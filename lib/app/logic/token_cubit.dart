@@ -5,11 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'token_state.dart';
 
 class TokenCubit extends Cubit<TokenState> {
-  TokenCubit({required this.tService}) : super(TokenState(token: tService.read));
+  TokenCubit({required this.tService})
+      : super(TokenState(token: tService.read));
 
   final TokenService tService;
 
-  Future<void> save(String token) async {
+  Future<void> saveToken(String token) async {
     await tService.save(token);
     emit(TokenState(token: token));
   }

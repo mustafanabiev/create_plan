@@ -44,17 +44,6 @@ class AppRouter {
         builder: (context, state) => const SignInPage(),
       ),
     ],
-    redirect: (context, state) {
-      final loggedIn = tokenState.token != null;
-      final loggingIn = state.subloc == '/signIn';
-      if (!loggedIn) {
-        return loggingIn ? null : '/signIn';
-      }
-      if (loggingIn) {
-        return '/';
-      }
-      return null;
-    },
     errorBuilder: (context, state) => Center(
       child: Text('${state.error}'),
     ),

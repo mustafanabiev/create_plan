@@ -5,7 +5,7 @@ import 'package:create_plan/constants/constants.dart';
 import 'package:create_plan/l10n/l10n.dart';
 import 'package:create_plan/locator.dart';
 import 'package:create_plan/modules/modules.dart';
-import 'package:create_plan/packages/model/model.dart';
+import 'package:create_plan/packages/packages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -102,15 +102,17 @@ class NewPlanView extends StatelessWidget {
                       if (fromKey.currentState!.validate()) {
                         titleController.clear;
                         descController.clear;
-                        if (titleController.text.isNotEmpty && descController.text.isNotEmpty) {
-                          context.read<NewPlanCubit>().createNewPlan(
-                                  newPlan: NewPlanModel(
-                                userID: GetToken.getToken(context),
-                                taskTitle: titleController.text,
-                                taskDescription: descController.text,
-                                taskDate: '18.01.2023',
-                                createdAt: Timestamp.now(),
-                              ));
+                        if (titleController.text.isNotEmpty &&
+                            descController.text.isNotEmpty) {
+                          context.read<NewPlanCubit>().saveNewPlan(
+                                NewPlanModel(
+                                  // userID: GetToken.getToken(context),
+                                  taskTitle: titleController.text,
+                                  taskDescription: descController.text,
+                                  taskDate: '18.01.2023',
+                                  createdAt: Timestamp.now(),
+                                ),
+                              );
                           context.go('/');
                         }
                       }

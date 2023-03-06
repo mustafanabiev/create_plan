@@ -9,6 +9,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 
+import 'packages/services/new_plan_sevices.dart';
+
 final sl = GetIt.instance;
 
 Future<void> setup(
@@ -23,13 +25,19 @@ Future<void> setup(
   final firestoreDB = FirebaseFirestore.instance;
 
   sl
-    ..registerFactory(() => TokenCubit(tService: sl<TokenService>()))
+    ..registerFactory(() => TokenCubit(
+          tService: sl<TokenService>(),
+        ))
     ..registerFactory(() => HomeCubit())
     ..registerFactory(() => UserProfileCubit(userRepo: sl<UserRepo>()))
     ..registerFactory(
-      () => AuthenticationCubit(authRepo: sl<AuthRepo>(), userRepo: sl<UserRepo>()),
+      () => AuthenticationCubit(
+        authRepo: sl<AuthRepo>(),
+        userRepo: sl<UserRepo>(),
+      ),
     )
     ..registerFactory(() => NewPlanCubit(
+          newPlanServices: sl<NewPlanServices>(),
           userRepo: sl<UserRepo>(),
           newPlanRepo: sl<NewPlanRepo>(),
         ))
@@ -42,7 +50,8 @@ Future<void> setup(
     ..registerLazySingleton<NewPlanRepo>(
       () => NewPlanRepoImpl(firestore: sl<FireStore>()),
     )
-    ..registerLazySingleton<AppService>(() => AppService(sl<AppCache<String>>()))
+    ..registerLazySingleton<AppService>(
+        () => AppService(sl<AppCache<String>>()))
     ..registerLazySingleton<ThemeService>(
       () => ThemeService(sl<AppCache<String>>()),
     )

@@ -4,16 +4,24 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:create_plan/core/core.dart';
 import 'package:create_plan/packages/packages.dart';
+import 'package:create_plan/packages/services/new_plan_sevices.dart';
 
 part 'new_plan_state.dart';
 
 class NewPlanCubit extends Cubit<NewPlanState> {
+  final NewPlanServices newPlanServices;
   final NewPlanRepo newPlanRepo;
   final UserRepo userRepo;
   NewPlanCubit({
+    required this.newPlanServices,
     required this.newPlanRepo,
     required this.userRepo,
-  }) : super(const NewPlanState());
+  }) : super(NewPlanState(newPlan: newPlanServices.init()));
+
+  Future<void> saveNewPlan(dynamic value) async {
+    await newPlanServices.saveNewPlan(value);
+    emit(state.copyWith(newPlan: value));
+  }
 
   void createNewPlan({required NewPlanModel newPlan}) async {
     emit(state.copyWith(isLoading: true));
